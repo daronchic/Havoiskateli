@@ -17,12 +17,14 @@ public:
 	void moveRight();
 	void moveUp();
 	void moveDown();
-	void stopMoving();
+	void stopMovingRL();
+	void stopMovingUD();
 	virtual void animationDone(std::string currentAnimation);
 	virtual void setupAnimations();
 
 private:
 	float m_satiety;
+	float m_sleepTime{ 0 };
 	int m_lifes;
 	float m_dx, m_dy;
 	Direction m_facing;

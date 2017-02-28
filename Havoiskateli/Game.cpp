@@ -23,7 +23,7 @@ Game::~Game()
 
 void Game::load() 
 {
-	this->_player = Player("player_1", 640 / 2, 480 / 2, 100, 3);
+	this->_player = Player("player_3", 640 / 2, 480 / 2, 100, 3);
 }
 
 void Game::init() 
@@ -60,6 +60,28 @@ void Game::input()
 	while (m_window.pollEvent(event)) {
 		if (event.type == sf::Event::Closed) {
 			m_window.close();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		{
+			_player.moveLeft();
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		{
+			_player.moveRight();
+		}
+		else {
+			_player.stopMovingRL();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+		{
+			_player.moveUp();
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		{
+			_player.moveDown();
+		}
+		else {
+			_player.stopMovingUD();
 		}
 	}
 }

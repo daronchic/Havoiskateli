@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "Player.h"
 
+namespace player_constants{
+	const float WALK_SPEED = 0.01f;
+	const int SLEEP_TIME = 5000;
+}
+
 
 Player::Player()
 {
@@ -25,18 +30,44 @@ void Player::setupAnimations()
 
 void Player::moveRight()
 {
+	this->m_dx = player_constants::WALK_SPEED;
+	m_state = WALK;
+	m_facing = RIGHT;
+	m_sleepTime = 0;
+}
+
+void Player::moveLeft()
+{
+	this->m_dx = -player_constants::WALK_SPEED;
+	m_state = WALK;
+	m_facing = LEFT;
+	m_sleepTime = 0;
 }
 
 void Player::moveUp()
 {
+	this->m_dy = -player_constants::WALK_SPEED;
+	m_state = WALK;
+	m_facing = UP;
+	m_sleepTime = 0;
 }
 
 void Player::moveDown()
 {
+	this->m_dy = player_constants::WALK_SPEED;
+	m_state = WALK;
+	m_facing = DOWN;
+	m_sleepTime = 0;
 }
 
-void Player::stopMoving()
+void Player::stopMovingRL()
 {
+	m_dx = 0.0f;
+}
+
+void Player::stopMovingUD()
+{
+	m_dy = 0.0f;
 }
 
 void Player::animationDone(std::string currentAnimation) {}
@@ -44,6 +75,14 @@ void Player::animationDone(std::string currentAnimation) {}
 void Player::update(float elapsedTime)
 {
 	AnimatedSprite::update(elapsedTime);
+	this->move(this->m_dx * elapsedTime, this->m_dy * elapsedTime);
+	if (m_dx == 0.0f && m_dy == 0.0f) {
+		m_state = STAY;
+		this->m_sleepTime++;
+	}
+	if (m_sleepTime > player_constants::SLEEP_TIME) {
+		m_state = SLEEP;
+	}
 	switch (m_state)
 	{
 	case STAY:
@@ -58,10 +97,6 @@ void Player::update(float elapsedTime)
 	default:
 		break;
 	}
-}
-
-void Player::moveLeft()
-{
 }
 
 Player::~Player()
