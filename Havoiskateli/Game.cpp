@@ -23,7 +23,7 @@ Game::~Game()
 
 void Game::load() 
 {
-	this->_player = Player("player_3", 640 / 2, 480 / 2, 100, 3);
+	this->_player = Player("player_4", 640 / 2, 480 / 2, 100, 3);
 }
 
 void Game::init() 
@@ -49,7 +49,7 @@ void Game::gameLoop()
 
 		auto ftSeconds(ft / 1000.f);
 		auto fps(1.f / ftSeconds);
-		std::cout << fps << endl;
+		//std::cout << fps << endl;
 
 	}
 }
