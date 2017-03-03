@@ -10,7 +10,7 @@ using namespace std;
 
 Game::Game()
 {
-	m_window.create(sf::VideoMode(640, 480), "Havoiskateli");
+	m_window.create(sf::VideoMode(1280, 1024), "Havoiskateli");
 	load();
 	init();
 	gameLoop();
@@ -24,6 +24,7 @@ Game::~Game()
 void Game::load() 
 {
 	this->_player = Player("player_4", 640 / 2, 480 / 2, 100, 3);
+	this->_level = Level("city_day/debug_level2", Vector2(0, 0));
 }
 
 void Game::init() 
@@ -61,6 +62,10 @@ void Game::input()
 		if (event.type == sf::Event::Closed) {
 			m_window.close();
 		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+		{
+			m_window.close();
+		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			_player.moveLeft();
@@ -92,6 +97,7 @@ void Game::update()
 	for (; m_currentSlice >= -ftSlice; m_currentSlice -= ftSlice)
 	{
 		//Update game logic
+		
 		_player.update(m_currentSlice);
 	}
 }
@@ -99,6 +105,7 @@ void Game::update()
 void Game::draw() 
 {
 	m_window.clear(sf::Color::Blue);
+	_level.draw(m_window);
 	m_window.draw(_player);
 	m_window.display();
 }

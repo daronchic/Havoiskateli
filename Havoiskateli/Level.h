@@ -33,14 +33,14 @@ private:
 };
 
 struct Tileset {
-	sf::Texture* Texture;
+	sf::Image* Image;
 	int FirstGid;
 	Tileset() {
 		this->FirstGid = -1;
 	}
 
-	Tileset(sf::Texture* texture, int firstGid) {
-		this->Texture = texture;
+	Tileset(sf::Image* image, int firstGid) {
+		this->Image = image;
 		this->FirstGid = firstGid;
 	}
 };
