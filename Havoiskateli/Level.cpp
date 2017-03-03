@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Level.h"
+#include "tinyxml2.h"
 
 
 Level::Level()
