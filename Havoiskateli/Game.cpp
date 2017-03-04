@@ -10,7 +10,7 @@ using namespace std;
 
 Game::Game()
 {
-	m_window.create(sf::VideoMode(1280, 1024), "Havoiskateli");
+	m_window.create(sf::VideoMode(800, 600), "Havoiskateli");
 	load();
 	init();
 	gameLoop();

@@ -53,6 +53,7 @@ void Level::loadMap(std::string mapName) //mapName like stagefolder/level_name
 			std::string string;
 			sstr.str("");
 			tileSetFileName.str("");
+			sstr.flush();
 			tileSetFileName.flush();
 			const char* source = pTileset->FirstChildElement("image")->Attribute("source");
 			sstr << source;
@@ -93,6 +94,7 @@ void Level::loadMap(std::string mapName) //mapName like stagefolder/level_name
 							}
 
 							int gid = pTile->IntAttribute("gid");
+							std::cout << "Gid = " << gid << std::endl;
 							Tileset tls;
 							for (int i = 0; i < this->m_tilesets.size(); i++) {
 								if (this->m_tilesets[i].FirstGid <= gid) {
@@ -130,7 +132,11 @@ void Level::loadMap(std::string mapName) //mapName like stagefolder/level_name
 							Tile tile(tls.Image, Vector2(tileWidth, tileHeight), finalTilesetPosition, finalTilePosition);
 							this->m_tileList.push_back(tile);
 							tileCounter++;
-
+							std::cout << "x,y = " << xx << " " << yy << std::endl;
+							std::cout << "tileSize = " << tileWidth << " " << tileHeight << std::endl;
+							std::cout << "SetSize = " << tilesetWidth << " " << tilesetHeight << std::endl;
+							std::cout << "amt = " << amt << std::endl;
+							std::cout << "tilesetPos = " << tilesetxx << " " << tilesetyy << std::endl;
 
 							pTile = pTile->NextSiblingElement("tile");
 						}
