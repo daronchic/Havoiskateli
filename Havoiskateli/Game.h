@@ -6,6 +6,9 @@
 #include "Player.h"
 #include "Level.h";
 
+//Background movement 1#
+//Draw background on sprite, move this sprite
+
 using FrameTime = float;
 
 enum State {

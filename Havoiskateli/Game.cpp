@@ -23,8 +23,8 @@ Game::~Game()
 
 void Game::load() 
 {
-	this->_player = Player("player_4", 640 / 2, 480 / 2, 100, 3);
-	this->_level = Level("city_day/debug_level2", Vector2(0, 0));
+	this->_player = Player("player_1", 640 / 2, 480 / 2, 100, 3);
+	this->_level = Level("city_day/debug_level", Vector2(0, 0));
 }
 
 void Game::init() 
