@@ -34,6 +34,9 @@ private:
 	FrameTime m_lastft{ 0.f }, m_currentSlice{ 0.f };
 	Player _player;
 	Level _level;
+	sf::RenderTexture m_levelTexture;
+	MSprite m_levelSprite;
+	float m_dx, m_dy; //for level speed
 
 };
 

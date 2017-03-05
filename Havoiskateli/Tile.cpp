@@ -27,7 +27,7 @@ void Tile::update(int elapsedTime)
 
 }
 
-void Tile::draw(sf::RenderWindow &window)
+void Tile::draw(sf::RenderTexture &window)
 {
 	window.draw(m_sprite);
 }

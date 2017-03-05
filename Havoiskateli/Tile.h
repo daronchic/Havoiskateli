@@ -12,7 +12,7 @@ public:
 	Tile(sf::Image* tileset, Vector2 size, Vector2 tilesetPosition, Vector2 position);
 	~Tile();
 	void update(int elapsedTime);
-	void draw(sf::RenderWindow &window);
+	void draw(sf::RenderTexture &window);
 
 private:
 	sf::Image* m_tileset;

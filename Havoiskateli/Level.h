@@ -18,7 +18,7 @@ public:
 	~Level();
 
 	void update(float elapsedTime);
-	void draw(sf::RenderWindow& window);
+	void draw(sf::RenderTexture& window);
 
 private:
 	std::string m_mapName;

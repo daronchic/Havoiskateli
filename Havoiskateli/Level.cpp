@@ -149,7 +149,7 @@ void Level::update(float elapsedTime)
 
 }
 
-void Level::draw(sf::RenderWindow &window)
+void Level::draw(sf::RenderTexture &window)
 {
 	for each (auto tile in this->m_tileList)
 	{
