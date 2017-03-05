@@ -30,10 +30,27 @@ void Game::load()
 void Game::init() 
 {
 	m_window.setFramerateLimit(60);
-	m_levelTexture.create(1250, 1250); 
+	m_levelTexture.create(1600, 1600); 
 	m_levelSprite.setTexture(m_levelTexture.getTexture());
+	m_levelWidth = m_levelSprite.getTexture()->getSize().x;
+	m_levelHeight = m_levelSprite.getTexture()->getSize().y;
 	/*m_levelSprite.setScale(static_cast<float> (m_window.getSize().x) / m_levelTexture.getSize().x,
 		static_cast<float> (m_window.getSize().y) / m_levelTexture.getSize().y); //Resize*/
+
+	sf::Joystick::Identification id = sf::Joystick::getIdentification(0);
+	std::cout << "\nVendor ID: " << id.vendorId << "\nProduct ID: " << id.productId << std::endl;
+	sf::String controller("Joystick Use: " + id.name);
+
+	if (sf::Joystick::isConnected(0)) {
+		// check how many buttons joystick number 0 has
+		unsigned int buttonCount = sf::Joystick::getButtonCount(0);
+
+		// check if joystick number 0 has a Z axis
+		bool hasZ = sf::Joystick::hasAxis(0, sf::Joystick::Z);
+
+		std::cout << "Button count: " << buttonCount << std::endl;
+		std::cout << "Has a z-axis: " << hasZ << std::endl;
+	}
 }
 
 void Game::gameLoop() 
@@ -61,35 +78,40 @@ void Game::gameLoop()
 
 void Game::input() 
 {
-	std::cout << m_levelSprite.getPosition().x;
 	sf::Event event;
+	Vector2 speed;
 	while (m_window.pollEvent(event)) {
 		if (event.type == sf::Event::Closed) {
 			m_window.close();
 		}
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		{
 			m_window.close();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			if (m_levelSprite.getPosition().x > -32) {
+			if (m_levelSprite.getPosition().x > -32.0f) {
 				m_dx = 0.0f;
+				_player.moveLeft(true);
 			}
 			else {
-				m_dx = 0.01f;
+				m_dx = 0.02f;
+				_player.moveLeft(false);
 			}
-			_player.moveLeft();
+			
 
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			_player.moveRight();
-			if (m_levelSprite.getPosition().x + m_levelSprite.getTexture()->getSize().x < 790) {
+
+			if (m_levelSprite.getPosition().x + m_levelSprite.getTexture()->getSize().x < 800) {
 				m_dx = 0.0f;
+				_player.moveRight(true);
 			}
 			else {
-				m_dx = -0.01f;
+				m_dx = -0.02f;
+				_player.moveRight(false);
 			}
 		}
 		else {
@@ -98,22 +120,26 @@ void Game::input()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
-			_player.moveUp();
-			if (m_levelSprite.getPosition().y > -32) {
+
+			if (m_levelSprite.getPosition().y > -32.0f) {
 				m_dy = 0.0f;
+				_player.moveUp(true);
 			}
 			else {
-				m_dy = 0.01f;
+				m_dy = 0.02f;
+				_player.moveUp(false);
 			}
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			_player.moveDown();
-			if (m_levelSprite.getPosition().y + m_levelSprite.getTexture()->getSize().y < 590) {
+
+			if (m_levelSprite.getPosition().y + m_levelSprite.getTexture()->getSize().y <= 568.f) {
 				m_dy = 0.0f;
+				_player.moveDown(true);
 			}
 			else {
-				m_dy = -0.01f;
+				m_dy = -0.02f;
+				_player.moveDown(false);
 			}
 		}
 		else {
@@ -130,6 +156,13 @@ void Game::update()
 	{
 		//Update game logic
 		m_levelSprite.move(m_dx * m_currentSlice, m_dy * m_currentSlice);
+		if ((m_levelSprite.getPosition().x + m_levelSprite.getTexture()->getSize().x) < 800) {
+
+			m_levelSprite.setPosition((800 - m_levelWidth), m_levelSprite.getPosition().y);
+		}
+		if ((m_levelSprite.getPosition().y + m_levelSprite.getTexture()->getSize().y) < 600) {
+			m_levelSprite.setPosition(m_levelSprite.getPosition().x, 600 - m_levelHeight);
+		}
 		_player.update(m_currentSlice);
 	}
 }

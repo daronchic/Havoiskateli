@@ -13,10 +13,10 @@ public:
 	~Player();
 
 	void update(float elapsedTime);
-	void moveLeft();
-	void moveRight();
-	void moveUp();
-	void moveDown();
+	void moveLeft(bool walking);
+	void moveRight(bool walking);
+	void moveUp(bool walking);
+	void moveDown(bool walking);
 	void stopMovingRL();
 	void stopMovingUD();
 	virtual void animationDone(std::string currentAnimation);

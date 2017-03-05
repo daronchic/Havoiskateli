@@ -37,6 +37,6 @@ private:
 	sf::RenderTexture m_levelTexture;
 	MSprite m_levelSprite;
 	float m_dx, m_dy; //for level speed
-
+	int m_levelWidth, m_levelHeight;
 };
 

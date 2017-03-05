@@ -2,7 +2,7 @@
 #include "Player.h"
 
 namespace player_constants{
-	const float WALK_SPEED = 0.01f;
+	const float WALK_SPEED = 0.02f;
 	const int SLEEP_TIME = 5000;
 }
 
@@ -28,33 +28,33 @@ void Player::setupAnimations()
 	addAnimation(7, 0, 64, "stay", 32, 32, Vector2(0, 0));
 }
 
-void Player::moveRight()
+void Player::moveRight(bool walking)
 {
-	this->m_dx = player_constants::WALK_SPEED;
+	if(walking) this->m_dx = player_constants::WALK_SPEED;
 	m_state = WALK;
 	m_facing = RIGHT;
 	m_sleepTime = 0;
 }
 
-void Player::moveLeft()
+void Player::moveLeft(bool walking)
 {
-	this->m_dx = -player_constants::WALK_SPEED;
+	if (walking) this->m_dx = -player_constants::WALK_SPEED;
 	m_state = WALK;
 	m_facing = LEFT;
 	m_sleepTime = 0;
 }
 
-void Player::moveUp()
+void Player::moveUp(bool walking)
 {
-	this->m_dy = -player_constants::WALK_SPEED;
+	if (walking) this->m_dy = -player_constants::WALK_SPEED;
 	m_state = WALK;
 	m_facing = UP;
 	m_sleepTime = 0;
 }
 
-void Player::moveDown()
+void Player::moveDown(bool walking)
 {
-	this->m_dy = player_constants::WALK_SPEED;
+	if (walking) this->m_dy = player_constants::WALK_SPEED;
 	m_state = WALK;
 	m_facing = DOWN;
 	m_sleepTime = 0;
