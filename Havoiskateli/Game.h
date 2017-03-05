@@ -7,7 +7,7 @@
 #include "Level.h";
 
 //Background movement 1#
-//Draw background on sprite, move this sprite
+//Draw background on sprite, move this sprite, draw player as usual
 
 using FrameTime = float;
 
