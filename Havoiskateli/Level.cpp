@@ -23,6 +23,26 @@ Level::~Level()
 {
 }
 
+void Level::moveDown()
+{
+
+}
+
+void Level::moveLeft()
+{
+
+}
+
+void Level::moveRight()
+{
+
+}
+
+void Level::moveUp()
+{
+
+}
+
 void Level::loadMap(std::string mapName) //mapName like stagefolder/level_name
 {
 	XMLDocument doc;
@@ -141,18 +161,28 @@ void Level::loadMap(std::string mapName) //mapName like stagefolder/level_name
 			pLayer = pLayer->NextSiblingElement("layer");
 		}
 	}
-
+	m_levelTexture.create(1600, 1600);
+	m_levelSprite.setTexture(m_levelTexture.getTexture());
 }
 
 void Level::update(float elapsedTime)
 {
+	m_levelSprite.move(m_dx * elapsedTime, m_dy * elapsedTime);
+	if ((m_levelSprite.getPosition().x + m_levelSprite.getTexture()->getSize().x) < 800) {
 
+		m_levelSprite.setPosition((800 - m_size.x), m_levelSprite.getPosition().y);
+	}
+	if ((m_levelSprite.getPosition().y + m_levelSprite.getTexture()->getSize().y) < 600) {
+		m_levelSprite.setPosition(m_levelSprite.getPosition().x, 600 - m_size.y);
+	}
 }
 
-void Level::draw(sf::RenderTexture &window)
+void Level::draw(sf::RenderWindow &window)
 {
 	for each (auto tile in this->m_tileList)
 	{
-		tile.draw(window);
+		tile.draw(m_levelTexture);
 	}
+	window.draw(m_levelSprite);
+	m_levelTexture.display();
 }

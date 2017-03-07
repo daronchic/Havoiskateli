@@ -17,8 +17,12 @@ public:
 	Level(std::string mapName, Vector2 spawnPoint);
 	~Level();
 
+	void moveLeft();
+	void moveRight();
+	void moveUp();
+	void moveDown();
 	void update(float elapsedTime);
-	void draw(sf::RenderTexture& window);
+	void draw(sf::RenderWindow& window);
 
 private:
 	std::string m_mapName;
@@ -28,6 +32,10 @@ private:
 
 	std::vector<Tile> m_tileList;
 	std::vector<Tileset> m_tilesets;
+
+	sf::RenderTexture m_levelTexture;
+	MSprite m_levelSprite;
+	float m_dx, m_dy;
 
 	void loadMap(std::string mapName);
 };
