@@ -128,6 +128,7 @@ void Game::input()
 		else {
 			_player.stopMovingRL();
 			_level->stopHorizontalMoving();
+			_player.stopMoving();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{

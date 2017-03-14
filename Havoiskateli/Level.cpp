@@ -55,10 +55,6 @@ void Level::stopVerticalMoving()
 
 bool Level::canMove(Direction side)
 {
-	// 0 - left
-	// 1 - up
-	// 2 - right
-	// 3 - down
 	switch (side)
 	{
 	case LEFT:

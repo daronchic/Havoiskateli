@@ -34,6 +34,7 @@ void Player::moveRight(bool walking)
 	m_state = WALK;
 	m_facing = RIGHT;
 	m_sleepTime = 0;
+	m_isMoving = true;
 }
 
 void Player::moveLeft(bool walking)
@@ -42,6 +43,7 @@ void Player::moveLeft(bool walking)
 	m_state = WALK;
 	m_facing = LEFT;
 	m_sleepTime = 0;
+	m_isMoving = true;
 }
 
 void Player::moveUp(bool walking)
@@ -50,6 +52,7 @@ void Player::moveUp(bool walking)
 	m_state = WALK;
 	m_facing = UP;
 	m_sleepTime = 0;
+	m_isMoving = true;
 }
 
 void Player::moveDown(bool walking)
@@ -58,6 +61,7 @@ void Player::moveDown(bool walking)
 	m_state = WALK;
 	m_facing = DOWN;
 	m_sleepTime = 0;
+	m_isMoving = true;
 }
 
 void Player::stopMovingRL()
@@ -70,15 +74,23 @@ void Player::stopMovingUD()
 	m_dy = 0.0f;
 }
 
+void Player::stopMoving()
+{
+	this->m_isMoving = false;
+}
+
 void Player::animationDone(std::string currentAnimation) {}
 
 void Player::update(float elapsedTime)
 {
 	AnimatedSprite::update(elapsedTime);
 	this->move(this->m_dx * elapsedTime, this->m_dy * elapsedTime);
-	if (m_dx == 0.0f && m_dy == 0.0f) {
+	if (!m_isMoving) {
 		m_state = STAY;
 		this->m_sleepTime++;
+	}
+	if (m_isMoving) {
+		m_state = WALK;
 	}
 	if (m_sleepTime > player_constants::SLEEP_TIME) {
 		m_state = SLEEP;
