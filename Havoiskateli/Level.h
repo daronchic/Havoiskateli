@@ -21,8 +21,11 @@ public:
 	void moveRight();
 	void moveUp();
 	void moveDown();
+	void stopVerticalMoving();
+	void stopHorizontalMoving();
 	void update(float elapsedTime);
 	void draw(sf::RenderWindow& window);
+	bool canMove(Direction side);
 
 private:
 	std::string m_mapName;

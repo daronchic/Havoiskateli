@@ -25,22 +25,57 @@ Level::~Level()
 
 void Level::moveDown()
 {
-
+	m_dy = -0.02f;
 }
 
 void Level::moveLeft()
 {
-
+	m_dx = 0.02f;
 }
 
 void Level::moveRight()
 {
-
+	m_dx = -0.02f;
 }
 
 void Level::moveUp()
 {
+	m_dy = 0.02f;
+}
 
+void Level::stopHorizontalMoving()
+{
+	m_dx = 0;
+}
+
+void Level::stopVerticalMoving()
+{
+	m_dy = 0;
+}
+
+bool Level::canMove(Direction side)
+{
+	// 0 - left
+	// 1 - up
+	// 2 - right
+	// 3 - down
+	switch (side)
+	{
+	case LEFT:
+		return m_levelSprite.getPosition().x <= -1;
+		break;
+	case UP:
+		return m_levelSprite.getPosition().y <= -1;
+		break;
+	case RIGHT:
+		return m_levelSprite.getPosition().x + 1600 >= 801;
+		break;
+	case DOWN:
+		return m_levelSprite.getPosition().y + 1600 >= 601;
+		break;
+	default:
+		break;
+	}
 }
 
 void Level::loadMap(std::string mapName) //mapName like stagefolder/level_name
@@ -168,12 +203,21 @@ void Level::loadMap(std::string mapName) //mapName like stagefolder/level_name
 void Level::update(float elapsedTime)
 {
 	m_levelSprite.move(m_dx * elapsedTime, m_dy * elapsedTime);
-	if ((m_levelSprite.getPosition().x + m_levelSprite.getTexture()->getSize().x) < 800) {
-
-		m_levelSprite.setPosition((800 - m_size.x), m_levelSprite.getPosition().y);
+	if( m_levelSprite.getPosition().x > 0)
+	{
+		m_levelSprite.setPosition(0, m_levelSprite.getPosition().y);
 	}
-	if ((m_levelSprite.getPosition().y + m_levelSprite.getTexture()->getSize().y) < 600) {
-		m_levelSprite.setPosition(m_levelSprite.getPosition().x, 600 - m_size.y);
+	else if(m_levelSprite.getPosition().y > 0)
+	{
+		m_levelSprite.setPosition(m_levelSprite.getPosition().x, 0);
+	}
+	else if(m_levelSprite.getPosition().x + 1600 < 800)
+	{ 
+		m_levelSprite.setPosition(800 - 1600, m_levelSprite.getPosition().y);
+	}
+	else if(m_levelSprite.getPosition().y + 1600 < 600)
+	{
+		m_levelSprite.setPosition(m_levelSprite.getPosition().x, 600 - 1600);
 	}
 }
 

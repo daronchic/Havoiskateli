@@ -23,8 +23,8 @@ Game::~Game()
 
 void Game::load() 
 {
-	this->_player = Player("player_1", 640 / 2, 480 / 2, 100, 3);
 	this->_level = new Level("city_day/debug_level", Vector2(0, 0));
+	this->_player = Player("player_1", 640 / 2, 480 / 2, 100, 3);
 }
 
 void Game::init() 
@@ -34,7 +34,9 @@ void Game::init()
 	sf::Joystick::Identification id = sf::Joystick::getIdentification(0);
 	std::cout << "\nVendor ID: " << id.vendorId << "\nProduct ID: " << id.productId << std::endl;
 	sf::String controller("Joystick Use: " + id.name);
-
+	_player.setPosition(400, 300);
+	_player.stopMovingRL();
+	_player.stopMovingUD();
 	if (sf::Joystick::isConnected(0)) {
 		// check how many buttons joystick number 0 has
 		unsigned int buttonCount = sf::Joystick::getButtonCount(0);
@@ -85,60 +87,98 @@ void Game::input()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			if (m_levelSprite.getPosition().x > -32.0f) {
-				m_dx = 0.0f;
-				_player.moveLeft(true);
+			if (_level->canMove(LEFT))
+			{
+				if (_player.getPosition().x < 400)
+				{
+					_player.stopMovingRL();
+					_level->moveLeft();
+					_player.moveLeft(false);
+				}
+				else {
+					_level->stopHorizontalMoving();
+					_player.moveLeft(true);
+				}
 			}
 			else {
-				m_dx = 0.02f;
-				_player.moveLeft(false);
+				_level->stopHorizontalMoving();
+				_player.moveLeft(true);
 			}
-			
-
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-
-			if (m_levelSprite.getPosition().x + m_levelSprite.getTexture()->getSize().x < 800) {
-				m_dx = 0.0f;
-				_player.moveRight(true);
+			if (_level->canMove(RIGHT))
+			{
+				if (_player.getPosition().x > 400)
+				{
+					_player.stopMovingRL();
+					_level->moveRight();
+					_player.moveRight(false);
+				}
+				else {
+					_level->stopHorizontalMoving();
+					_player.moveRight(true);
+				}
 			}
 			else {
-				m_dx = -0.02f;
-				_player.moveRight(false);
+				_level->stopHorizontalMoving();
+				_player.moveRight(true);
 			}
 		}
 		else {
 			_player.stopMovingRL();
-			m_dx = 0;
+			_level->stopHorizontalMoving();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
-
-			if (m_levelSprite.getPosition().y > -32.0f) {
-				m_dy = 0.0f;
-				_player.moveUp(true);
+			if (_level->canMove(UP))
+			{
+				if (_player.getPosition().y < 300)
+				{
+					_player.stopMovingUD();
+					_level->moveUp();
+					_player.moveUp(false);
+				}
+				else {
+					_level->stopVerticalMoving();
+					_player.moveUp(true);
+				}
 			}
 			else {
-				m_dy = 0.02f;
-				_player.moveUp(false);
+				_level->stopVerticalMoving();
+				_player.moveUp(true);
 			}
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-
-			if (m_levelSprite.getPosition().y + m_levelSprite.getTexture()->getSize().y <= 568.f) {
-				m_dy = 0.0f;
-				_player.moveDown(true);
+			if (_level->canMove(DOWN))
+			{
+				if (_player.getPosition().y > 350)
+				{
+					_player.stopMovingUD();
+					_level->moveDown();
+					_player.moveDown(false);
+				}
+				else {
+					_level->stopVerticalMoving();
+					_player.moveDown(true);
+				}
 			}
 			else {
-				m_dy = -0.02f;
-				_player.moveDown(false);
+				_level->stopVerticalMoving();
+				_player.moveDown(true);
 			}
 		}
 		else {
 			_player.stopMovingUD();
-			m_dy = 0;
+			_level->stopVerticalMoving();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		{
+			std::cout << (int)_player.getPosition().x << " " << (int)_player.getPosition().y << std::endl;
+			_player.stopMovingRL();
+			_player.stopMovingUD();
+			_player.setPosition(400, 300);
 		}
 	}
 }
