@@ -2,6 +2,7 @@
 
 #include "Globals.h"
 #include "Tile.h"
+#include "Rectangle.h"
 
 #include <string>
 #include <vector>
@@ -23,6 +24,8 @@ public:
 	void moveDown();
 	void stopVerticalMoving();
 	void stopHorizontalMoving();
+
+	std::vector<Rectangle> checkTileCollision(const Rectangle &other);
 	void update(float elapsedTime);
 	void draw(sf::RenderWindow& window);
 	bool canMove(Direction side);
@@ -35,6 +38,7 @@ private:
 
 	std::vector<Tile> m_tileList;
 	std::vector<Tileset> m_tilesets;
+	std::vector<Rectangle> m_collisionRectangles;
 
 	sf::RenderTexture m_levelTexture;
 	MSprite m_levelSprite;

@@ -83,6 +83,7 @@ void Player::animationDone(std::string currentAnimation) {}
 
 void Player::update(float elapsedTime)
 {
+	MSprite::update(elapsedTime);
 	AnimatedSprite::update(elapsedTime);
 	this->move(this->m_dx * elapsedTime, this->m_dy * elapsedTime);
 	if (!m_isMoving) {

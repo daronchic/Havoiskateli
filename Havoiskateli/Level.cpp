@@ -192,8 +192,51 @@ void Level::loadMap(std::string mapName) //mapName like stagefolder/level_name
 			pLayer = pLayer->NextSiblingElement("layer");
 		}
 	}
+	XMLElement* pObjectGroup = mapNode->FirstChildElement("objectgroup");
+
+	if (pObjectGroup != NULL) {
+		while (pObjectGroup) {
+			const char* name = pObjectGroup->Attribute("name");
+			std::stringstream nameString;
+			nameString.str("");
+			nameString.flush();
+			nameString << name;
+			if (nameString.str() == "collisions") {
+				XMLElement* pObject = pObjectGroup->FirstChildElement("object");
+				if (pObject != NULL) {
+					while (pObject) {
+						float x, y, width, height;
+						x = pObject->FloatAttribute("x");
+						y = pObject->FloatAttribute("y");
+						width = pObject->FloatAttribute("width");
+						height = pObject->FloatAttribute("height");
+						m_collisionRectangles.push_back(Rectangle(
+							std::ceil(x),
+							std::ceil(y),
+							std::ceil(width),
+							std::ceil(height)
+						));
+						pObject = pObject->NextSiblingElement("object");
+					}
+				}
+			}
+			pObjectGroup = pObjectGroup->NextSiblingElement("objectgroup");
+		}
+	}
 	m_levelTexture.create(1600, 1600);
 	m_levelSprite.setTexture(m_levelTexture.getTexture());
+}
+
+std::vector<Rectangle> Level::checkTileCollision(const Rectangle & other)
+{
+	std::vector<Rectangle> others;
+	for each (auto rect in m_collisionRectangles)
+	{
+		if (rect.colledesWith(other)) {
+			others.push_back(rect);
+		}
+	}
+	return others;
 }
 
 void Level::update(float elapsedTime)

@@ -163,6 +163,7 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="MSprite.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -179,6 +180,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="MSprite.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
