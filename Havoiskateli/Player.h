@@ -22,6 +22,7 @@ public:
 	void stopMoving();
 	virtual void animationDone(std::string currentAnimation);
 	virtual void setupAnimations();
+	void handleTileCollisons(std::vector<Rectangle> &others);
 	
 private:
 	float m_satiety;

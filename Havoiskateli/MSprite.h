@@ -16,9 +16,9 @@ public:
 	const sides::Side getCollisionSide(const Rectangle &other) const;
 protected:
 	sf::Image m_image;
-
+	Rectangle m_boundingBox;
 private:
 	sf::Texture* m_texture;
-	Rectangle m_boundingBox;
+
 };
 

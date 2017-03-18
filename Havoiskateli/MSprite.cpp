@@ -22,7 +22,7 @@ MSprite::MSprite(const std::string &filename, int sourceX, int sourceY, int widt
 
 void MSprite::update(int elapsedTime)
 {
-	m_boundingBox = Rectangle(this->getPosition().x, this->getPosition().y, this->getTexture()->getSize.x, this->getTexture()->getSize.y);
+	m_boundingBox = Rectangle(this->getPosition().x, this->getPosition().y, this->getTexture()->getSize().x, this->getTexture()->getSize().y);
 }
 
 const Rectangle MSprite::getCollisonBox() const
@@ -32,7 +32,22 @@ const Rectangle MSprite::getCollisonBox() const
 
 const sides::Side MSprite::getCollisionSide(const Rectangle & other) const
 {
-	int amtLeft, amtRight, amrUp, amtDown;
-
-	return sides::Side();
+	int amtLeft, amtRight, amtTop, amtBottom;
+	amtRight = this->getCollisonBox().getRight() - other.getLeft();
+	amtLeft = other.getRight() - this->getCollisonBox().getLeft();
+	amtTop = other.getBottom() - this->getCollisonBox().getTop();
+	amtBottom = this->getCollisonBox().getBottom() - other.getTop();
+	int vals[4] = { amtLeft, amtRight, amtTop, amtBottom };
+	int lowest = vals[0];
+	for (int i = 0; i < 4; i++) {
+		if (vals[i] < lowest) {
+			lowest = vals[i];
+		}
+	}
+	return
+		lowest == abs(amtLeft) ? sides::LEFT :
+		lowest == abs(amtRight) ? sides::RIGHT :
+		lowest == abs(amtTop) ? sides::TOP :
+		lowest == abs(amtBottom) ? sides::BOTTOM :
+		sides::NONE;
 }

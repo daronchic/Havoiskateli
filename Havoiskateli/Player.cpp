@@ -28,6 +28,35 @@ void Player::setupAnimations()
 	addAnimation(7, 0, 64, "stay", 32, 32, Vector2(0, 0));
 }
 
+void Player::handleTileCollisons(std::vector<Rectangle>& others)
+{
+	for each (auto other in others)
+	{
+		sides::Side collisionSide = MSprite::getCollisionSide(other);
+		if (collisionSide != sides::NONE) {
+			switch (collisionSide) {
+			case sides::TOP:
+				this->setPosition(this->getPosition().x, other.getBottom() + 1);
+				this->m_dy = 0;
+				break;
+
+			case sides::BOTTOM:
+				this->setPosition(this->getPosition().x, other.getTop() - m_boundingBox.getHeight() - 1);
+				this->m_dy = 0;
+				break;
+			case sides::LEFT:
+				this->setPosition(other.getRight() + 1, this->getPosition().y);
+				this->m_dx = 0;
+				break;
+			case sides::RIGHT:
+				this->setPosition(other.getLeft() - m_boundingBox.getWidth() - 1, this->getPosition().y);
+				this->m_dx = 0;
+				break;
+			}
+		}
+	}
+}
+
 void Player::moveRight(bool walking)
 {
 	if(walking) this->m_dx = player_constants::WALK_SPEED;

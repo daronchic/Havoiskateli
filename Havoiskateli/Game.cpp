@@ -190,7 +190,10 @@ void Game::update()
 	for (; m_currentSlice >= -ftSlice; m_currentSlice -= ftSlice)
 	{
 		//Update game logic
-
+		std::vector<Rectangle> others;
+		if ((others = this->_level->checkTileCollision(this->_player.getCollisonBox())).size() > 0) {
+			this->_player.handleTileCollisons(others);
+		}
 		_player.update(m_currentSlice);
 		_level->update(m_currentSlice);
 	}
