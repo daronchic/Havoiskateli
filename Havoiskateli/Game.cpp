@@ -176,10 +176,10 @@ void Game::input()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		{
-			std::cout << (int)_player.getPosition().x << " " << (int)_player.getPosition().y << std::endl;
-			_player.stopMovingRL();
-			_player.stopMovingUD();
-			_player.setPosition(400, 300);
+			std::cout << (int)_level->m_collisionRectangles[0].getLeft() << " " << (int)_level->m_collisionRectangles[0].getTop() << std::endl;
+			//_player.stopMovingRL();
+			//_player.stopMovingUD();
+			//_player.setPosition(400, 300);
 		}
 	}
 }

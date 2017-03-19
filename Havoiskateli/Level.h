@@ -29,16 +29,17 @@ public:
 	void update(float elapsedTime);
 	void draw(sf::RenderWindow& window);
 	bool canMove(Direction side);
-
+	std::vector<Rectangle> m_collisionRectangles;
 private:
 	std::string m_mapName;
 	Vector2 m_spawnPoint;
 	Vector2 m_size;
 	Vector2 m_tileSize;
+	Vector2 m_offset;
 
 	std::vector<Tile> m_tileList;
 	std::vector<Tileset> m_tilesets;
-	std::vector<Rectangle> m_collisionRectangles;
+
 
 	sf::RenderTexture m_levelTexture;
 	MSprite m_levelSprite;

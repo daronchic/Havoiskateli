@@ -74,3 +74,9 @@ const bool Rectangle::isValidRectangle() const
 	return (m_x >= 0 && m_y >= 0 && m_width >= 0 && m_height >= 0);
 }
 
+void Rectangle::setPosition(int x, int y)
+{
+	m_x += x;
+	m_y += y;
+}
+

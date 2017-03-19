@@ -20,6 +20,8 @@ public:
 
 	const bool isValidRectangle() const;
 
+	void setPosition(int x, int y);
+
 private:
 	int m_x, m_y, m_width, m_height;
 };
