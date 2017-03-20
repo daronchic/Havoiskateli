@@ -13,8 +13,7 @@ Level::Level()
 Level::Level(std::string mapName, Vector2 spawnPoint) :
 	m_mapName(mapName),
 	m_spawnPoint(spawnPoint),
-	m_size(Vector2(0,0)),
-	m_offset(Vector2(0,0))
+	m_size(Vector2(0,0))
 {
 	this->loadMap(mapName);
 }
@@ -22,61 +21,6 @@ Level::Level(std::string mapName, Vector2 spawnPoint) :
 
 Level::~Level()
 {
-}
-
-void Level::moveDown()
-{
-	m_dy = -0.02f;
-	m_offset = Vector2(m_offset.x, m_offset.y + m_dy);
-}
-
-void Level::moveLeft()
-{
-	m_dx = 0.02f;
-	m_offset = Vector2(m_offset.x + m_dx, m_offset.y);
-}
-
-void Level::moveRight()
-{
-	m_dx = -0.02f;
-	m_offset = Vector2(m_offset.x + m_dx, m_offset.y);
-}
-
-void Level::moveUp()
-{
-	m_dy = 0.02f;
-	m_offset = Vector2(m_offset.x, m_offset.y + m_dy);
-}
-
-void Level::stopHorizontalMoving()
-{
-	m_dx = 0;
-}
-
-void Level::stopVerticalMoving()
-{
-	m_dy = 0;
-}
-
-bool Level::canMove(Direction side)
-{
-	switch (side)
-	{
-	case LEFT:
-		return m_levelSprite.getPosition().x <= -1;
-		break;
-	case UP:
-		return m_levelSprite.getPosition().y <= -1;
-		break;
-	case RIGHT:
-		return m_levelSprite.getPosition().x + 1600 >= 801;
-		break;
-	case DOWN:
-		return m_levelSprite.getPosition().y + 1600 >= 601;
-		break;
-	default:
-		break;
-	}
 }
 
 void Level::loadMap(std::string mapName) //mapName like stagefolder/level_name
@@ -246,28 +190,7 @@ std::vector<Rectangle> Level::checkTileCollision(const Rectangle & other)
 
 void Level::update(float elapsedTime)
 {
-	m_levelSprite.move(m_dx * elapsedTime, m_dy * elapsedTime);
-	for each (auto rect in m_collisionRectangles)
-	{
-		rect.setPosition(m_offset.x, m_offset.y);
-		//rect = Rectangle(rect.getLeft() + m_offset.x, rect.getTop() + m_offset.y, rect.getWidth(), rect.getHeight());
-	}
-	if( m_levelSprite.getPosition().x > 0)
-	{
-		m_levelSprite.setPosition(0, m_levelSprite.getPosition().y);
-	}
-	else if(m_levelSprite.getPosition().y > 0)
-	{
-		m_levelSprite.setPosition(m_levelSprite.getPosition().x, 0);
-	}
-	else if(m_levelSprite.getPosition().x + 1600 < 800)
-	{ 
-		m_levelSprite.setPosition(800 - 1600, m_levelSprite.getPosition().y);
-	}
-	else if(m_levelSprite.getPosition().y + 1600 < 600)
-	{
-		m_levelSprite.setPosition(m_levelSprite.getPosition().x, 600 - 1600);
-	}
+	
 }
 
 void Level::draw(sf::RenderWindow &window)

@@ -38,5 +38,7 @@ private:
 	MSprite m_levelSprite;
 	float m_dx, m_dy; //for level speed
 	int m_levelWidth, m_levelHeight;
+	sf::View m_playerView;
+	float viewX, viewY;
 };
 

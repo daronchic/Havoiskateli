@@ -18,24 +18,15 @@ public:
 	Level(std::string mapName, Vector2 spawnPoint);
 	~Level();
 
-	void moveLeft();
-	void moveRight();
-	void moveUp();
-	void moveDown();
-	void stopVerticalMoving();
-	void stopHorizontalMoving();
-
 	std::vector<Rectangle> checkTileCollision(const Rectangle &other);
 	void update(float elapsedTime);
 	void draw(sf::RenderWindow& window);
-	bool canMove(Direction side);
 	std::vector<Rectangle> m_collisionRectangles;
 private:
 	std::string m_mapName;
 	Vector2 m_spawnPoint;
 	Vector2 m_size;
 	Vector2 m_tileSize;
-	Vector2 m_offset;
 
 	std::vector<Tile> m_tileList;
 	std::vector<Tileset> m_tilesets;
@@ -43,7 +34,6 @@ private:
 
 	sf::RenderTexture m_levelTexture;
 	MSprite m_levelSprite;
-	float m_dx, m_dy;
 
 	void loadMap(std::string mapName);
 };

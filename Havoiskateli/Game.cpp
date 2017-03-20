@@ -30,7 +30,8 @@ void Game::load()
 void Game::init() 
 {
 	m_window.setFramerateLimit(60);
-
+	m_playerView = sf::View(sf::FloatRect(_player.getPosition().x, _player.getPosition().y, 800, 600));
+	m_window.setView(m_playerView);
 	sf::Joystick::Identification id = sf::Joystick::getIdentification(0);
 	std::cout << "\nVendor ID: " << id.vendorId << "\nProduct ID: " << id.productId << std::endl;
 	sf::String controller("Joystick Use: " + id.name);
@@ -87,99 +88,30 @@ void Game::input()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			if (_level->canMove(LEFT))
-			{
-				if (_player.getPosition().x < 400)
-				{
-					_player.stopMovingRL();
-					_level->moveLeft();
-					_player.moveLeft(false);
-				}
-				else {
-					_level->stopHorizontalMoving();
 					_player.moveLeft(true);
-				}
-			}
-			else {
-				_level->stopHorizontalMoving();
-				_player.moveLeft(true);
-			}
+
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			if (_level->canMove(RIGHT))
-			{
-				if (_player.getPosition().x > 400)
-				{
-					_player.stopMovingRL();
-					_level->moveRight();
-					_player.moveRight(false);
-				}
-				else {
-					_level->stopHorizontalMoving();
-					_player.moveRight(true);
-				}
-			}
-			else {
-				_level->stopHorizontalMoving();
 				_player.moveRight(true);
-			}
 		}
 		else {
 			_player.stopMovingRL();
-			_level->stopHorizontalMoving();
-			_player.stopMoving();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
-			if (_level->canMove(UP))
-			{
-				if (_player.getPosition().y < 300)
-				{
-					_player.stopMovingUD();
-					_level->moveUp();
-					_player.moveUp(false);
-				}
-				else {
-					_level->stopVerticalMoving();
-					_player.moveUp(true);
-				}
-			}
-			else {
-				_level->stopVerticalMoving();
 				_player.moveUp(true);
-			}
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			if (_level->canMove(DOWN))
-			{
-				if (_player.getPosition().y > 350)
-				{
-					_player.stopMovingUD();
-					_level->moveDown();
-					_player.moveDown(false);
-				}
-				else {
-					_level->stopVerticalMoving();
-					_player.moveDown(true);
-				}
-			}
-			else {
-				_level->stopVerticalMoving();
 				_player.moveDown(true);
-			}
 		}
 		else {
 			_player.stopMovingUD();
-			_level->stopVerticalMoving();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		{
 			std::cout << (int)_level->m_collisionRectangles[0].getLeft() << " " << (int)_level->m_collisionRectangles[0].getTop() << std::endl;
-			//_player.stopMovingRL();
-			//_player.stopMovingUD();
-			//_player.setPosition(400, 300);
 		}
 	}
 }
@@ -187,6 +119,7 @@ void Game::input()
 void Game::update() 
 {
 	m_currentSlice += m_lastft;
+
 	for (; m_currentSlice >= -ftSlice; m_currentSlice -= ftSlice)
 	{
 		//Update game logic
@@ -195,6 +128,22 @@ void Game::update()
 			this->_player.handleTileCollisons(others);
 		}
 		_player.update(m_currentSlice);
+		viewX = _player.getPosition().x;
+		viewY = _player.getPosition().y;
+		if (m_playerView.getCenter().x + 400 >= 1500 && _player.getPosition().x > m_playerView.getCenter().x) {
+			viewX = 1500 - 400;
+		}
+		if (m_playerView.getCenter().x - 400 <= 0 && _player.getPosition().x < m_playerView.getCenter().x) {
+			viewX = 400;
+		}
+		if (m_playerView.getCenter().y - 300 <= 0 && _player.getPosition().y < m_playerView.getCenter().y) {
+			viewY = 300;
+		}
+		if (m_playerView.getCenter().y + 300 >= 1500 && _player.getPosition().y > m_playerView.getCenter().y) {
+			viewY = 1500 - 300;
+		}
+		m_playerView.setCenter(viewX, viewY);
+		m_window.setView(m_playerView);
 		_level->update(m_currentSlice);
 	}
 }
