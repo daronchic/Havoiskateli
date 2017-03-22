@@ -25,12 +25,15 @@ void Game::load()
 {
 	this->_level = new Level("city_day/debug_level", Vector2(0, 0));
 	this->_player = Player("player_1", 640 / 2, 480 / 2, 100, 3);
+	this->_hud = HUD(620, 545);
+	this->_hud.load();
 }
 
 void Game::init() 
 {
 	m_window.setFramerateLimit(60);
 	m_playerView = sf::View(sf::FloatRect(_player.getPosition().x, _player.getPosition().y, 800, 600));
+	m_hudView = sf::View(sf::FloatRect(0, 0, 800, 600));
 	m_window.setView(m_playerView);
 	sf::Joystick::Identification id = sf::Joystick::getIdentification(0);
 	std::cout << "\nVendor ID: " << id.vendorId << "\nProduct ID: " << id.productId << std::endl;
@@ -38,6 +41,7 @@ void Game::init()
 	_player.setPosition(400, 300);
 	_player.stopMovingRL();
 	_player.stopMovingUD();
+	_hud.initialize();
 	if (sf::Joystick::isConnected(0)) {
 		// check how many buttons joystick number 0 has
 		unsigned int buttonCount = sf::Joystick::getButtonCount(0);
@@ -109,9 +113,9 @@ void Game::input()
 		else {
 			_player.stopMovingUD();
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Space)
 		{
-			std::cout << (int)_level->m_collisionRectangles[0].getLeft() << " " << (int)_level->m_collisionRectangles[0].getTop() << std::endl;
+			_hud.changeState();
 		}
 	}
 }
@@ -145,6 +149,7 @@ void Game::update()
 		m_playerView.setCenter(viewX, viewY);
 		m_window.setView(m_playerView);
 		_level->update(m_currentSlice);
+		_hud.update(m_currentSlice);
 	}
 }
 
@@ -154,6 +159,7 @@ void Game::draw()
 	_level->draw(m_window);
 	//m_window.draw(m_levelSprite);
 	m_window.draw(_player);
-	//m_levelTexture.display();
+	m_window.setView(m_hudView);
+	_hud.draw(m_window);
 	m_window.display();
 }

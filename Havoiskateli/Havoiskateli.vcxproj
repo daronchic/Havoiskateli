@@ -160,6 +160,7 @@
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Havoiskateli.cpp" />
+    <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="MSprite.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="HUD.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="MSprite.h" />
     <ClInclude Include="Player.h" />
