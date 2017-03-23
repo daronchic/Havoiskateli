@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Globals.h"
 #include "Tile.h"
 #include "Rectangle.h"
 

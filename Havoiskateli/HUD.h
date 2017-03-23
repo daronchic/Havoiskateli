@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Globals.h"
 #include "MSprite.h"
-
 
 class HUD
 {
@@ -10,7 +8,7 @@ public:
 	HUD();
 	HUD(int x, int y);
 	void load();
-	void initialize();
+	void initialize(int lifes);
 	void update(int elapsedTime);
 	void draw(sf::RenderWindow &window);
 
@@ -25,9 +23,11 @@ private:
 	MSprite m_additionalBlock;
 	MSprite m_life;
 	std::vector<MSprite> m_additionalBox;
+	std::vector<MSprite> m_lifeBox;
 	float m_x, m_y;
+	int m_lifes;
+	float m_satiety;
 	Vector2 CLOSED_POSITION;
 	Vector2 OPENED_POSITION;
-
 };
 

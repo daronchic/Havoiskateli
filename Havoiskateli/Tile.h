@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Globals.h"
 #include "MSprite.h"
 
 #include <SFML/Graphics.hpp>

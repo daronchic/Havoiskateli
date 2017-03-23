@@ -39,7 +39,6 @@ private:
 	HUD _hud;
 	sf::RenderTexture m_levelTexture;
 	MSprite m_levelSprite;
-	float m_dx, m_dy; //for level speed
 	int m_levelWidth, m_levelHeight;
 	sf::View m_playerView;
 	sf::View m_hudView;

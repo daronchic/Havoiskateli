@@ -57,6 +57,11 @@ void Player::handleTileCollisons(std::vector<Rectangle>& others)
 	}
 }
 
+int Player::getLifes()
+{
+	return m_lifes;
+}
+
 void Player::moveRight(bool walking)
 {
 	if(walking) this->m_dx = player_constants::WALK_SPEED;
@@ -93,12 +98,12 @@ void Player::moveDown(bool walking)
 	m_isMoving = true;
 }
 
-void Player::stopMovingRL()
+void Player::stopHorizontalMoving()
 {
 	m_dx = 0.0f;
 }
 
-void Player::stopMovingUD()
+void Player::stopVerticalMoving()
 {
 	m_dy = 0.0f;
 }

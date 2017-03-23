@@ -42,6 +42,9 @@ void Level::loadMap(std::string mapName) //mapName like stagefolder/level_name
 	mapNode->QueryIntAttribute("tileheight", &tileHeight);
 	this->m_tileSize = Vector2(tileWidth, tileHeight);
 
+	globalData::levelWidth = width * tileWidth;
+	globalData::levelHeight = height * tileHeight;
+
 	XMLElement* pTileset = mapNode->FirstChildElement("tileset");
 	if (pTileset != NULL) {
 
@@ -172,7 +175,7 @@ void Level::loadMap(std::string mapName) //mapName like stagefolder/level_name
 			pObjectGroup = pObjectGroup->NextSiblingElement("objectgroup");
 		}
 	}
-	m_levelTexture.create(1600, 1600);
+	m_levelTexture.create(globalData::levelWidth, globalData::levelHeight);
 	m_levelSprite.setTexture(m_levelTexture.getTexture());
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Globals.h"
+
 class Rectangle
 {
 public:

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Globals.h"
 #include "AnimatedSprite.h"
 
 #include <string>
@@ -17,12 +16,13 @@ public:
 	void moveRight(bool walking);
 	void moveUp(bool walking);
 	void moveDown(bool walking);
-	void stopMovingRL();
-	void stopMovingUD();
+	void stopHorizontalMoving();
+	void stopVerticalMoving();
 	void stopMoving();
 	virtual void animationDone(std::string currentAnimation);
 	virtual void setupAnimations();
 	void handleTileCollisons(std::vector<Rectangle> &others);
+	int getLifes();
 	
 private:
 	float m_satiety;

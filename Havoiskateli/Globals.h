@@ -6,6 +6,13 @@ struct Vector2 {
 	Vector2(int _x, int _y) : x(_x), y(_y) {}
 };
 
+namespace globalData {
+	static const int screenWidth{ 1366 };
+	static const int screenHeight{ 768 };
+	static int levelWidth = 1600;
+	static int levelHeight = 1600;
+}
+
 enum Direction {
 	LEFT,
 	RIGHT,

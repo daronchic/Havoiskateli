@@ -1,7 +1,6 @@
 #pragma once
 
 #include "MSprite.h"
-#include "Globals.h"
 
 #include <iostream>
 #include <map>

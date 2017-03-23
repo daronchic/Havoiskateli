@@ -23,7 +23,7 @@ void HUD::load()
 	m_life = MSprite("content/images/HUD/HUD_life.png", 0, 0, 14, 14, m_x, m_y);
 }
 
-void HUD::initialize()
+void HUD::initialize(int lifes)
 {
 	OPENED_POSITION = Vector2(CLOSED_POSITION.x - 102, CLOSED_POSITION.y - 125);
 	m_panel.setPosition(m_x, m_y);
@@ -31,6 +31,11 @@ void HUD::initialize()
 	m_additionalBox.push_back(MSprite(m_additionalBlock));
 	m_additionalBox.push_back(MSprite(m_additionalBlock));
 	m_additionalBox.push_back(MSprite(m_additionalBlock));
+	m_lifes = lifes;
+	for (int i = 0; i < lifes; i++) {
+		m_lifeBox.push_back(MSprite(m_life));
+	}
+	m_satiety = 1.0f;
 }
 
 void HUD::update(int elapsedTime)
@@ -39,6 +44,9 @@ void HUD::update(int elapsedTime)
 	m_playerData.setPosition(m_x + 18, m_y + 15);
 	for (int i = 0; i < 3; i++) {
 		m_additionalBox.at(i).setPosition(m_x + 210, m_y + 15 + i * 50);
+	}
+	for (int i = 0; i < m_lifes; i++) {
+		m_lifeBox.at(i).setPosition(m_x + 60 + i * 16, m_y + 20);
 	}
 	if (m_opened) {
 		open(elapsedTime);
@@ -54,6 +62,9 @@ void HUD::draw(sf::RenderWindow & window)
 	window.draw(m_playerData);
 	for (int i = 0; i < 3; i++) {
 		window.draw(m_additionalBox.at(i));
+	}
+	for (int i = 0; i < m_lifes; i++) {
+		window.draw(m_lifeBox.at(i));
 	}
 }
 

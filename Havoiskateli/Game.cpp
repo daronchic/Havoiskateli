@@ -10,7 +10,7 @@ using namespace std;
 
 Game::Game()
 {
-	m_window.create(sf::VideoMode(800, 600), "Havoiskateli");
+	m_window.create(sf::VideoMode(globalData::screenWidth, globalData::screenHeight), "Havoiskateli", sf::Style::Fullscreen);
 	load();
 	init();
 	gameLoop();
@@ -25,33 +25,20 @@ void Game::load()
 {
 	this->_level = new Level("city_day/debug_level", Vector2(0, 0));
 	this->_player = Player("player_1", 640 / 2, 480 / 2, 100, 3);
-	this->_hud = HUD(620, 545);
+	this->_hud = HUD(globalData::screenWidth - 180, globalData::screenHeight - 55);
 	this->_hud.load();
 }
 
 void Game::init() 
 {
 	m_window.setFramerateLimit(60);
-	m_playerView = sf::View(sf::FloatRect(_player.getPosition().x, _player.getPosition().y, 800, 600));
-	m_hudView = sf::View(sf::FloatRect(0, 0, 800, 600));
+	m_playerView = sf::View(sf::FloatRect(_player.getPosition().x, _player.getPosition().y, globalData::screenWidth, globalData::screenHeight));
+	m_hudView = sf::View(sf::FloatRect(0, 0, globalData::screenWidth, globalData::screenHeight));
 	m_window.setView(m_playerView);
-	sf::Joystick::Identification id = sf::Joystick::getIdentification(0);
-	std::cout << "\nVendor ID: " << id.vendorId << "\nProduct ID: " << id.productId << std::endl;
-	sf::String controller("Joystick Use: " + id.name);
-	_player.setPosition(400, 300);
-	_player.stopMovingRL();
-	_player.stopMovingUD();
-	_hud.initialize();
-	if (sf::Joystick::isConnected(0)) {
-		// check how many buttons joystick number 0 has
-		unsigned int buttonCount = sf::Joystick::getButtonCount(0);
-
-		// check if joystick number 0 has a Z axis
-		bool hasZ = sf::Joystick::hasAxis(0, sf::Joystick::Z);
-
-		std::cout << "Button count: " << buttonCount << std::endl;
-		std::cout << "Has a z-axis: " << hasZ << std::endl;
-	}
+	_player.setPosition(globalData::screenWidth / 2, globalData::screenHeight / 2);
+	_player.stopHorizontalMoving();
+	_player.stopVerticalMoving();
+	_hud.initialize(_player.getLifes());
 }
 
 void Game::gameLoop() 
@@ -100,7 +87,7 @@ void Game::input()
 				_player.moveRight(true);
 		}
 		else {
-			_player.stopMovingRL();
+			_player.stopHorizontalMoving();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
@@ -111,7 +98,7 @@ void Game::input()
 				_player.moveDown(true);
 		}
 		else {
-			_player.stopMovingUD();
+			_player.stopVerticalMoving();
 		}
 		if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Space)
 		{
@@ -134,17 +121,17 @@ void Game::update()
 		_player.update(m_currentSlice);
 		viewX = _player.getPosition().x;
 		viewY = _player.getPosition().y;
-		if (m_playerView.getCenter().x + 400 >= 1500 && _player.getPosition().x > m_playerView.getCenter().x) {
-			viewX = 1500 - 400;
+		if (m_playerView.getCenter().x + globalData::screenWidth / 2 >= globalData::levelWidth && _player.getPosition().x > m_playerView.getCenter().x) {
+			viewX = globalData::levelWidth - globalData::screenWidth / 2;
 		}
-		if (m_playerView.getCenter().x - 400 <= 0 && _player.getPosition().x < m_playerView.getCenter().x) {
-			viewX = 400;
+		if (m_playerView.getCenter().x - globalData::screenWidth / 2 <= 0 && _player.getPosition().x < m_playerView.getCenter().x) {
+			viewX = globalData::screenWidth / 2;
 		}
-		if (m_playerView.getCenter().y - 300 <= 0 && _player.getPosition().y < m_playerView.getCenter().y) {
-			viewY = 300;
+		if (m_playerView.getCenter().y - globalData::screenHeight / 2 <= 0 && _player.getPosition().y < m_playerView.getCenter().y) {
+			viewY = globalData::screenHeight / 2;
 		}
-		if (m_playerView.getCenter().y + 300 >= 1500 && _player.getPosition().y > m_playerView.getCenter().y) {
-			viewY = 1500 - 300;
+		if (m_playerView.getCenter().y + globalData::screenHeight / 2 >= globalData::levelHeight && _player.getPosition().y > m_playerView.getCenter().y) {
+			viewY = globalData::levelHeight - globalData::screenHeight / 2;
 		}
 		m_playerView.setCenter(viewX, viewY);
 		m_window.setView(m_playerView);
@@ -157,7 +144,6 @@ void Game::draw()
 {
 	m_window.clear(sf::Color::Cyan);
 	_level->draw(m_window);
-	//m_window.draw(m_levelSprite);
 	m_window.draw(_player);
 	m_window.setView(m_hudView);
 	_hud.draw(m_window);
