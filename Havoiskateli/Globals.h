@@ -43,3 +43,12 @@ namespace sides {
 			NONE;
 	}
 }
+
+namespace States {
+	enum ID {
+		TitleScreen,
+		MainMenuScreen,
+		GameScreen,
+		PauseScreen
+	};
+}

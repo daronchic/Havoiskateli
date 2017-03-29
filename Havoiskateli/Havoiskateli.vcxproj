@@ -159,12 +159,14 @@
   <ItemGroup>
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Havoiskateli.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="MSprite.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -177,12 +179,15 @@
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="StateStack.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="MSprite.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="State.hpp" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
