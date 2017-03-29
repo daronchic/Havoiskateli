@@ -1,7 +1,8 @@
 #pragma once
 
 #include <SFML\Graphics.hpp>
-
+#include "StateStack.h"
+#include "GameState.h"
 #include "MSprite.h"
 #include "Player.h"
 #include "Level.h"
@@ -13,17 +14,13 @@
 
 using FrameTime = float;
 
-enum State {
-	MENU,
-	GAME,
-	PAUSE
-};
 class Game
 {
 	constexpr static float ftStep{ 1.f }, ftSlice{ 1.f };
 public:
 	Game();
 	~Game();
+	void registerStates();
 	void load();
 	void init();
 	void input();
@@ -34,14 +31,6 @@ public:
 private:
 	sf::RenderWindow m_window;
 	FrameTime m_lastft{ 0.f }, m_currentSlice{ 0.f };
-	Player _player;
-	Level* _level;
-	HUD _hud;
-	sf::RenderTexture m_levelTexture;
-	MSprite m_levelSprite;
-	int m_levelWidth, m_levelHeight;
-	sf::View m_playerView;
-	sf::View m_hudView;
-	float viewX, viewY;
+	StateStack m_stateStack;
 };
 
