@@ -1,13 +1,13 @@
 #pragma once
 
 #include <SFML\Graphics.hpp>
+#include <SFML\Audio.hpp>
+#include "ResourceHolder.hpp"
+#include "ResourceIdentifiers.hpp"
 #include "StateStack.h"
 #include "GameState.h"
+#include "MainmenuState.h"
 #include "MSprite.h"
-#include "Player.h"
-#include "Level.h"
-#include "HUD.h"
-
 
 //Background movement 1#
 //Draw background on sprite, move this sprite, draw player as usual

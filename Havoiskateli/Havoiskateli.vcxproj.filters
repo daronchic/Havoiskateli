@@ -53,6 +53,9 @@
     <ClCompile Include="GameState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MainmenuState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -92,6 +95,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainmenuState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceIdentifiers.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceHolder.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

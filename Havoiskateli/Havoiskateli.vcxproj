@@ -163,6 +163,7 @@
     <ClCompile Include="Havoiskateli.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="MainmenuState.cpp" />
     <ClCompile Include="MSprite.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rectangle.cpp" />
@@ -180,6 +181,9 @@
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="MainmenuState.h" />
+    <ClInclude Include="ResourceHolder.hpp" />
+    <ClInclude Include="ResourceIdentifiers.hpp" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="HUD.h" />

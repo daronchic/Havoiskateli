@@ -25,6 +25,7 @@ Game::~Game()
 void Game::registerStates()
 {
 	m_stateStack.pushState(new GameState(m_window));
+	m_stateStack.pushState(new MainmenuState(m_window));
 }
 
 void Game::load() 
