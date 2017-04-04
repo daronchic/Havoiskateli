@@ -2,11 +2,13 @@
 
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
+#include "SettingsParser.hpp"
 #include "ResourceHolder.hpp"
 #include "ResourceIdentifiers.hpp"
 #include "StateStack.h"
 #include "GameState.h"
 #include "MainmenuState.h"
+#include "SettingsState.h"
 #include "MSprite.h"
 
 //Background movement 1#
@@ -21,6 +23,7 @@ public:
 	Game();
 	~Game();
 	void registerStates();
+	void run();
 	void load();
 	void init();
 	void input();
@@ -32,5 +35,6 @@ private:
 	sf::RenderWindow m_window;
 	FrameTime m_lastft{ 0.f }, m_currentSlice{ 0.f };
 	StateStack m_stateStack;
+	SettingsParser m_settingsParser;
 };
 

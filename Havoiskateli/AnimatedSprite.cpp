@@ -7,9 +7,9 @@ AnimatedSprite::AnimatedSprite()
 {
 }
 
-AnimatedSprite::AnimatedSprite(const std::string &filename, int sourceX, int sourceY, int width, int height,
+AnimatedSprite::AnimatedSprite(sf::Image image, int sourceX, int sourceY, int width, int height,
 	float posX, float posY, float timeToUpdate) :
-	MSprite(filename, sourceX, sourceY, width, height, posX, posY),
+	MSprite(image, sourceX, sourceY, width, height, posX, posY),
 	m_frameIndex(0),
 	m_timeToUpdate(timeToUpdate),
 	m_visible(false),

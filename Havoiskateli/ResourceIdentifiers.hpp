@@ -15,7 +15,12 @@ namespace Images
 		menu_background_1,
 		menu_background_2,
 		menu_background_3,
-		menu_background_4
+		menu_background_4,
+
+		player_1,
+		player_2,
+		player_3,
+		player_4
 	};
 }
 

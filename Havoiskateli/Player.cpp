@@ -11,8 +11,8 @@ Player::Player()
 {
 }
 
-Player::Player(std::string playerName, float x, float y, float satiety, int lifes) :
-	AnimatedSprite("Content/images/player/" + playerName + ".png", 0, 0, 32, 32, x, y, 1000),
+Player::Player(sf::Image image, float x, float y, float satiety, int lifes) :
+	AnimatedSprite(image, 0, 0, 32, 32, x, y, 1000),
 	m_satiety(satiety),
 	m_lifes(lifes)
 {

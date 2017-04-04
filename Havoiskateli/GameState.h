@@ -1,4 +1,6 @@
 #pragma once
+#include "ResourceIdentifiers.hpp"
+#include "ResourceHolder.hpp"
 #include "State.hpp"
 #include "Player.h"
 #include "Level.h"
@@ -16,17 +18,24 @@ public:
 	GameState(sf::RenderWindow &window);
 	~GameState();
 
+	StateCode complete();
 	void load();
 	void init();
 	void handleInput(sf::Event &event);
 	void update(float elapsed);
 	void draw();
 private:
+	ImagesHolder m_imagesHolder;
+	FontHolder m_fontHolder;
+	SoundHolder m_soundHolder;
+	MusicHolder m_musicHolder;
 	Player m_player;
 	Level* m_level;
 	HUD m_hud;
 	sf::View m_playerView;
 	sf::View m_hudView;
-	float m_viewX, m_viewY;
+	sf::Text m_speed;
+	sf::Font font;
+	float m_viewX, m_viewY, m_viewSpeedX, m_viewSpeedY;
 };
 

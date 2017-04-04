@@ -7,8 +7,8 @@ struct Vector2 {
 };
 
 namespace globalData {
-	static const int screenWidth{ 1366 };
-	static const int screenHeight{ 768 };
+	static int screenWidth{ 640 };
+	static int screenHeight{ 480 };
 	static int levelWidth = 1600;
 	static int levelHeight = 1600;
 }
@@ -24,6 +24,17 @@ enum PlayerState {
 	STAY,
 	WALK,
 	SLEEP
+};
+
+enum StateCode {
+	NEXT = 0x0,
+	PRIVIOUS,
+	MENU,
+	OPTIONS,
+	NEW_GAME,
+	LOAD,
+	EXIT,
+	NONE
 };
 
 namespace sides {

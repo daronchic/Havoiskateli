@@ -11,7 +11,7 @@ class AnimatedSprite : public MSprite
 {
 public:
 	AnimatedSprite();
-	AnimatedSprite(const std::string &filename, int sourceX, int sourceY, int width, int height, 
+	AnimatedSprite(sf::Image image, int sourceX, int sourceY, int width, int height, 
 		float posX, float posY, float timeToUpdate);
 	void playAnimation(const std::string &animation, bool once = false);
 	void update(int elapsedTime);

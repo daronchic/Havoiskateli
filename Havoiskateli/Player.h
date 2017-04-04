@@ -8,7 +8,7 @@ class Player : public AnimatedSprite
 {
 public:
 	Player();
-	Player(std::string playerName, float x, float y, float satiety, int lifes);
+	Player(sf::Image image, float x, float y, float satiety, int lifes);
 	~Player();
 
 	void update(float elapsedTime);

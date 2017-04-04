@@ -4,11 +4,27 @@
 MSprite::MSprite()
 {}
 
+MSprite::MSprite(sf::Image image, int sourceX, int sourceY, int width, int height, int posX, int posY)
+{
+	m_texture = new sf::Texture();
+	m_image = image;
+	if (!m_texture->loadFromImage(image, sf::IntRect(sourceX, sourceY, width, height)))
+	{
+		std::cout << "Can't load texture!";
+	}
+	else {
+		this->setTexture(*m_texture);
+		this->setPosition(posX, posY);
+	}
+
+	m_boundingBox = Rectangle(this->getPosition().x, this->getPosition().y, width, height);
+}
+
 MSprite::MSprite(const std::string &filename, int sourceX, int sourceY, int width, int height, int posX, int posY)
 {
 	m_texture = new sf::Texture();
 	m_image.loadFromFile(filename);
-	if (!m_texture->loadFromFile(filename, sf::IntRect(sourceX, sourceY, width, height)))
+	if (!m_texture->loadFromImage(m_image, sf::IntRect(sourceX, sourceY, width, height)))
 	{
 		std::cout << "Can't load texture!";
 	}
