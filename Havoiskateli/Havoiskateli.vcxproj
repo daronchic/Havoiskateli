@@ -168,6 +168,7 @@
     <ClCompile Include="MSprite.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SettingsParser.cpp" />
     <ClCompile Include="SettingsState.cpp" />
     <ClCompile Include="StateStack.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="MainmenuState.h" />
     <ClInclude Include="ResourceHolder.hpp" />
     <ClInclude Include="ResourceIdentifiers.hpp" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SettingsParser.hpp" />
     <ClInclude Include="SettingsState.h" />
     <ClInclude Include="StateStack.h" />

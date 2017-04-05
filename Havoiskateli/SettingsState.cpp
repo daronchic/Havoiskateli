@@ -40,7 +40,7 @@ void SettingsState::init()
 	m_title.setFillColor(sf::Color(255, 251, 75));
 	m_title.setPosition(m_window->getSize().x / 2 - m_title.getGlobalBounds().width / 2, 50);
 
-	m_settingsBack.setSize(sf::Vector2f(m_window->getSize().x / 3, m_window->getSize().y / 2));
+	m_settingsBack.setSize(sf::Vector2f(455, 384));
 	m_settingsBack.setFillColor(sf::Color(128, 109, 176, 217));
 	m_settingsBack.setPosition(
 		m_window->getSize().x / 2 - m_settingsBack.getSize().x / 2,
