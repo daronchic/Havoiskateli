@@ -28,7 +28,8 @@ void AnimatedSprite::addAnimation(int frames, int x, int y, std::string name, in
 	for (int i = 0; i < frames; i++)
 	{
 		sf::Texture* texture = new sf::Texture();
-		texture->loadFromImage(this->m_image, sf::IntRect((x + i) * width, y, width, height));
+		sf::IntRect rect = sf::IntRect(x + (i * width), y, width, height);
+		texture->loadFromImage(this->m_image, rect);
 		rectangles.push_back(texture);
 	}
 	this->m_animation.insert(std::pair<std::string, std::vector<sf::Texture*> >(name, rectangles));

@@ -11,8 +11,8 @@ class AnimatedSprite : public MSprite
 {
 public:
 	AnimatedSprite();
-	AnimatedSprite(sf::Image image, int sourceX, int sourceY, int width, int height, 
-		float posX, float posY, float timeToUpdate);
+	AnimatedSprite(sf::Image image, int sourceX = 0, int sourceY = 0, int width = 32, int height = 32, 
+		float posX = 0, float posY = 0, float timeToUpdate = 1000);
 	void playAnimation(const std::string &animation, bool once = false);
 	void update(int elapsedTime);
 

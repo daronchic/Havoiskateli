@@ -157,6 +157,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedObject.cpp" />
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameConfig.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SettingsParser.cpp" />
     <ClCompile Include="SettingsState.cpp" />
+    <ClCompile Include="StartingState.cpp" />
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -182,6 +184,7 @@
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimatedObject.h" />
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameConfig.h" />
@@ -192,6 +195,7 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SettingsParser.hpp" />
     <ClInclude Include="SettingsState.h" />
+    <ClInclude Include="StartingState.h" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="HUD.h" />

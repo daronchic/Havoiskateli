@@ -2,8 +2,6 @@
 #include "State.hpp"
 #include "Globals.h"
 #include "MSprite.h"
-#include "ResourceIdentifiers.hpp"
-#include "ResourceHolder.hpp"
 
 #include <TGUI\TGUI.hpp>
 
@@ -30,10 +28,6 @@ private:
 	int m_currentBackground{ 0 };
 	sf::Time m_timer;
 	sf::RectangleShape m_settingsBack;
-	ImagesHolder m_imagesHolder;
-	FontHolder m_fontHolder;
-	SoundHolder m_soundHolder;
-	MusicHolder m_musicHolder;
 	tgui::Gui m_gui;
 };
 

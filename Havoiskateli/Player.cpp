@@ -6,6 +6,20 @@ namespace player_constants{
 	const int SLEEP_TIME = 5000;
 }
 
+struct Profile
+{
+	std::string name;
+	std::string player;
+	int lifes;
+	Profile() {}
+	Profile(const std::string &name, const std::string &player, int lifes) :
+		name(name), player(player), lifes(lifes)
+	{}
+	void save() {}
+	void load() {}
+
+};
+
 
 Player::Player()
 {

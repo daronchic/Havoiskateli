@@ -16,6 +16,8 @@ namespace Images
 		menu_background_2,
 		menu_background_3,
 		menu_background_4,
+		menu_StartingWindow,
+		menu_stand,
 
 		player_1,
 		player_2,

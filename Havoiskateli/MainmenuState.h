@@ -1,6 +1,4 @@
 #pragma once
-#include "ResourceHolder.hpp"
-#include "ResourceIdentifiers.hpp"
 #include "Globals.h"
 #include "State.hpp"
 #include "MSprite.h"
@@ -28,9 +26,5 @@ private:
 	sf::Time m_timer;
 	MSprite m_back;
 	sf::RectangleShape m_buttonsBack;
-	ImagesHolder m_imagesHolder;
-	FontHolder m_fontHolder;
-	SoundHolder m_soundHolder;
-	MusicHolder m_musicHolder;
 };
 

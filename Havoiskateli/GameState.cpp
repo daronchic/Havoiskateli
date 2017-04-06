@@ -2,6 +2,7 @@
 #include "GameState.h"
 #include "Rectangle.h"
 #include "Globals.h"
+#include "ResourceManager.h"
 
 #include <sstream>
 
@@ -27,15 +28,10 @@ StateCode GameState::complete()
 
 void GameState::load()
 {
-	m_imagesHolder.load(Images::player_1, "content/images/player/player_1.png");
-	m_imagesHolder.load(Images::player_2, "content/images/player/player_2.png");
-	m_imagesHolder.load(Images::player_3, "content/images/player/player_3.png");
-	m_imagesHolder.load(Images::player_4, "content/images/player/player_4.png");
-
 	font.loadFromFile("content/fonts/8bitlimr.ttf");
 
 	this->m_level = new Level("city_day/debug_level", Vector2(0, 0));
-	this->m_player = Player(m_imagesHolder.get(Images::player_1), 640 / 2, 480 / 2, 100, 3);
+	this->m_player = Player(*ResourceManager::getInstance()->getImage(Images::player_2), 640 / 2, 480 / 2, 100, 3);
 	this->m_hud = HUD(m_window->getSize().x - 180, m_window->getSize().y - 55);
 	this->m_hud.load();
 }

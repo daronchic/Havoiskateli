@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SettingsState.h"
+#include "ResourceManager.h"
 
 
 SettingsState::SettingsState(sf::RenderWindow &window) : State(window), m_gui(window)
@@ -23,8 +24,6 @@ StateCode SettingsState::complete()
 
 void SettingsState::load()
 {
-	m_fontHolder.load(Fonts::titleFont, "content/fonts/zerovelo.ttf");
-	m_fontHolder.load(Fonts::menuFont, "content/fonts/8bitlimr.ttf");
 	m_background.emplace_back(MSprite("content/images/main_menu/background_1.png", 0, 0, 1366, 768, 0, 0));
 	m_background.emplace_back(MSprite("content/images/main_menu/background_2.png", 0, 0, 1366, 768, 0, 0));
 	m_background.emplace_back(MSprite("content/images/main_menu/background_3.png", 0, 0, 1366, 768, 0, 0));
@@ -36,7 +35,7 @@ void SettingsState::init()
 	m_window->setMouseCursorVisible(true);
 	m_title.setCharacterSize(45);
 	m_title.setString("Options");
-	m_title.setFont(m_fontHolder.get(Fonts::titleFont));
+	m_title.setFont(*ResourceManager::getInstance()->getFont(Fonts::titleFont));
 	m_title.setFillColor(sf::Color(255, 251, 75));
 	m_title.setPosition(m_window->getSize().x / 2 - m_title.getGlobalBounds().width / 2, 50);
 

@@ -9,6 +9,7 @@
 #include "GameState.h"
 #include "MainmenuState.h"
 #include "SettingsState.h"
+#include "StartingState.h"
 #include "MSprite.h"
 
 //Background movement 1#

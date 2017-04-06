@@ -9,7 +9,7 @@ class MSprite :
 {
 public: 
 	MSprite();
-	MSprite(sf::Image image, int sourceX, int sourceY, int width, int height, int posX, int posY);
+	MSprite(sf::Image image, int sourceX, int sourceY, int width = 32, int height = 32, int posX = 0, int posY = 0);
 	MSprite(const std::string &filename, int sourceX, int sourceY, int width, int height, int posX, int posY);
 	void update(int elapsedTime);
 	const Rectangle getCollisonBox() const;

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MainmenuState.h"
 #include "Globals.h"
+#include "ResourceManager.h"
 
 
 MainmenuState::MainmenuState() : State()
@@ -23,8 +24,6 @@ StateCode MainmenuState::complete()
 
 void MainmenuState::load()
 {
-	m_fontHolder.load(Fonts::titleFont, "content/fonts/zerovelo.ttf");
-	m_fontHolder.load(Fonts::menuFont, "content/fonts/8bitlimr.ttf");
 	m_background.emplace_back(MSprite("content/images/main_menu/background_1.png", 0, 0, 1366, 768, 0, 0));
 	m_background.emplace_back(MSprite("content/images/main_menu/background_2.png", 0, 0, 1366, 768, 0, 0));
 	m_background.emplace_back(MSprite("content/images/main_menu/background_3.png", 0, 0, 1366, 768, 0, 0));
@@ -35,13 +34,13 @@ void MainmenuState::init()
 {
 	m_title.setCharacterSize(50);
 	m_title.setString("HAVOISKATELI");
-	m_title.setFont(m_fontHolder.get(Fonts::titleFont));
+	m_title.setFont(*ResourceManager::getInstance()->getFont(Fonts::titleFont));
 	m_title.setFillColor(sf::Color(255, 251, 75));
 	m_title.setPosition(m_window->getSize().x / 2 - m_title.getGlobalBounds().width / 2, 50);
 
-	m_buttons.emplace_back(sf::Text("New Game", m_fontHolder.get(Fonts::menuFont), 50));
-	m_buttons.emplace_back(sf::Text("Options", m_fontHolder.get(Fonts::menuFont), 50));
-	m_buttons.emplace_back(sf::Text("Exit", m_fontHolder.get(Fonts::menuFont), 50));
+	m_buttons.emplace_back(sf::Text("New Game", *ResourceManager::getInstance()->getFont(Fonts::menuFont), 50));
+	m_buttons.emplace_back(sf::Text("Options", *ResourceManager::getInstance()->getFont(Fonts::menuFont), 50));
+	m_buttons.emplace_back(sf::Text("Exit", *ResourceManager::getInstance()->getFont(Fonts::menuFont), 50));
 	for (int i = 0; i < m_buttons.size(); i++) {
 		m_buttons.at(i).setPosition(m_window->getSize().x / 2 - m_buttons.at(i).getGlobalBounds().width / 2, m_window->getSize().y / 2 + i * 64);
 		m_buttons.at(i).setFillColor(sf::Color(79, 65, 116));

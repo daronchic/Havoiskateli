@@ -33,6 +33,7 @@ void Game::registerStates()
 {
 	m_stateStack.pushState(new GameState(m_window));
 	m_stateStack.pushState(new SettingsState(m_window));
+	m_stateStack.pushState(new StartingState(m_window));
 	m_stateStack.pushState(new MainmenuState(m_window));
 }
 
@@ -101,11 +102,11 @@ void Game::update()
 			run();
 			break;
 		case StateCode::NEW_GAME:
-			m_stateStack.changeState(new GameState(m_window));
+			m_stateStack.changeState(new StartingState(m_window));
 			run();
 			break;
 		case StateCode::NEXT:
-			m_stateStack.popState();
+			m_stateStack.changeState(new GameState(m_window));
 			run();
 			break;
 		case StateCode::OPTIONS:
@@ -115,11 +116,6 @@ void Game::update()
 		default:
 			break;
 		}
-
-		/*if (m_stateStack.peekState()->complete()) {
-			m_stateStack.popState();
-			run();
-		}*/
 	}
 }
 

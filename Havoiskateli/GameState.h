@@ -1,6 +1,4 @@
 #pragma once
-#include "ResourceIdentifiers.hpp"
-#include "ResourceHolder.hpp"
 #include "State.hpp"
 #include "Player.h"
 #include "Level.h"
@@ -25,10 +23,6 @@ public:
 	void update(float elapsed);
 	void draw();
 private:
-	ImagesHolder m_imagesHolder;
-	FontHolder m_fontHolder;
-	SoundHolder m_soundHolder;
-	MusicHolder m_musicHolder;
 	Player m_player;
 	Level* m_level;
 	HUD m_hud;
