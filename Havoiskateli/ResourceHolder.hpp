@@ -30,8 +30,9 @@ void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string
 {
 	std::unique_ptr<Resource> resource(new Resource());
 	if (!resource->loadFromFile(filename))
+	{
 		throw std::runtime_error("ResourceHolder::load - Failed to load " + filename);
-
+	}
 	insertResource(id, std::move(resource));
 }
 

@@ -37,16 +37,16 @@ bool GameConfig::getVerticalSync()
 	return vertSync;
 }
 
-int GameConfig::getMusicVolume()
+float GameConfig::getMusicVolume()
 {
 	int volume;
 	m_parser.get("music_volume", volume);
-	return volume;
+	return (float)volume;
 }
 
-int GameConfig::getSoundVolume()
+float GameConfig::getSoundVolume()
 {
-	int volume;
+	float volume;
 	m_parser.get("sound_volume", volume);
 	return volume;
 }
@@ -78,7 +78,7 @@ void GameConfig::setVerticalSync(bool value)
 
 void GameConfig::setMusicVolume(int value)
 {
-	m_parser.set("music_volume", value);
+	m_parser.set("music_volume", value*10);
 	if (!m_parser.saveToFile()) {
 		std::cout << "Error writing config file!" << std::endl;
 	}
@@ -86,7 +86,7 @@ void GameConfig::setMusicVolume(int value)
 
 void GameConfig::setSoundVolume(int value)
 {
-	m_parser.set("sound_volume", value);
+	m_parser.set("sound_volume", value*10);
 	if (!m_parser.saveToFile()) {
 		std::cout << "Error writing config file!" << std::endl;
 	}

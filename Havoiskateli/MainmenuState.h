@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "State.hpp"
 #include "MSprite.h"
+#include "AudioManager.h"
 
 class MainmenuState :
 	public State

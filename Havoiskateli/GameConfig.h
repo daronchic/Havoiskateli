@@ -10,8 +10,8 @@ public:
 	Vector2 getScreenSize();
 	bool getScreenMode();
 	bool getVerticalSync();
-	int getMusicVolume();
-	int getSoundVolume();
+	float getMusicVolume();
+	float getSoundVolume();
 
 	void setScreenSize(const Vector2 &size);
 	void setScreenMode(bool mode);

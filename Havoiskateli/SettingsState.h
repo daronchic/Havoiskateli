@@ -29,5 +29,6 @@ private:
 	sf::Time m_timer;
 	sf::RectangleShape m_settingsBack;
 	tgui::Gui m_gui;
+	float m_volume;
 };
 

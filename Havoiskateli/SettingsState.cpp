@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SettingsState.h"
 #include "ResourceManager.h"
+#include "AudioManager.h"
 
 
 SettingsState::SettingsState(sf::RenderWindow &window) : State(window), m_gui(window)
@@ -44,7 +45,6 @@ void SettingsState::init()
 	m_settingsBack.setPosition(
 		m_window->getSize().x / 2 - m_settingsBack.getSize().x / 2,
 		m_window->getSize().y / 2 - m_settingsBack.getSize().y / 2);
-
 	createGui();
 }
 
@@ -166,12 +166,13 @@ void SettingsState::createGui()
 	auto musicSlider = tgui::Slider::create();
 	musicSlider->setPosition("parent.width / 2", "parent.height / 4 + 200");
 	musicSlider->setSize(200, 18);
-	musicSlider->setValue(GameConfig::instance()->getMusicVolume());
+	musicSlider->setValue(GameConfig::instance()->getMusicVolume() / 10);
+	musicSlider->connect("ValueChanged", [&](int newValue) { AudioManager::instance()->changeVolume(newValue * 10); });
 
 	auto soundSlider = tgui::Slider::create();
 	soundSlider->setPosition("parent.width / 2", "parent.height / 4 + 240");
 	soundSlider->setSize(200, 18);
-	soundSlider->setValue(GameConfig::instance()->getSoundVolume());
+	soundSlider->setValue(GameConfig::instance()->getSoundVolume() / 10);
 
 	//Buttons
 	auto saveButton = tgui::Button::create();

@@ -32,6 +32,9 @@ void MainmenuState::load()
 
 void MainmenuState::init()
 {
+	//m_audioManager.playMusic(Musics::menu);
+	AudioManager::instance()->changeVolume(GameConfig::instance()->getMusicVolume());
+
 	m_title.setCharacterSize(50);
 	m_title.setString("HAVOISKATELI");
 	m_title.setFont(*ResourceManager::getInstance()->getFont(Fonts::titleFont));
@@ -73,6 +76,7 @@ void MainmenuState::handleInput(sf::Event & event)
 
 void MainmenuState::update(float elapsed)
 {
+	AudioManager::instance()->playMusic(Musics::menu);
 	m_timer += sf::seconds(1);
 	if (m_timer >= sf::seconds(10000)) {
 		m_currentBackground = rand() % 4;
