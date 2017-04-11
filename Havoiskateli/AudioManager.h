@@ -13,13 +13,15 @@ public:
 	static AudioManager *instance();
 	void loadMusic();
 	void playMusic(Musics::ID id, bool once = false);
+	void stopMusic();
 	void playSound(Sounds::ID id, bool once = false);
-	void changeVolume(float volume);
+	void changeVolume(float music_volume = -1, float sound_volume = -1);
 
 private:
 	static AudioManager *m_instance;
 	float m_musicVolume, m_soundVolume;
 	sf::Music m_currentMusic;
-	sf::SoundBuffer m_buffer;
+	sf::Sound m_sound;
+	std::map<Musics::ID, std::string> m_audioPath;
 };
 

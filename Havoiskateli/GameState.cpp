@@ -3,6 +3,7 @@
 #include "Rectangle.h"
 #include "Globals.h"
 #include "ResourceManager.h"
+#include "AudioManager.h"
 
 #include <sstream>
 
@@ -50,6 +51,8 @@ void GameState::init()
 
 	m_speed.setPosition(100, 100);
 	m_speed.setFont(font);
+
+	AudioManager::instance()->playMusic(Musics::city);
 }
 
 void GameState::handleInput(sf::Event &event)

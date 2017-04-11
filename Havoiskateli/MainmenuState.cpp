@@ -33,8 +33,8 @@ void MainmenuState::load()
 void MainmenuState::init()
 {
 	//m_audioManager.playMusic(Musics::menu);
-	AudioManager::instance()->changeVolume(GameConfig::instance()->getMusicVolume());
-
+	AudioManager::instance()->changeVolume(GameConfig::instance()->getMusicVolume(), GameConfig::instance()->getSoundVolume());
+	AudioManager::instance()->playMusic(Musics::menu);
 	m_title.setCharacterSize(50);
 	m_title.setString("HAVOISKATELI");
 	m_title.setFont(*ResourceManager::getInstance()->getFont(Fonts::titleFont));
@@ -57,11 +57,14 @@ void MainmenuState::handleInput(sf::Event & event)
 {
 	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Up) {
 		m_switched--;
+		AudioManager::instance()->playSound(Sounds::button_switched, true);
 	}
 	else if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Down) {
 		m_switched++;
+		AudioManager::instance()->playSound(Sounds::button_switched, true);
 	}
 	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Return) {
+		AudioManager::instance()->playSound(Sounds::button_pressed, true);
 		if (m_switched == 0) {
 			m_stateCode = StateCode::NEW_GAME;
 		}
@@ -76,7 +79,6 @@ void MainmenuState::handleInput(sf::Event & event)
 
 void MainmenuState::update(float elapsed)
 {
-	AudioManager::instance()->playMusic(Musics::menu);
 	m_timer += sf::seconds(1);
 	if (m_timer >= sf::seconds(10000)) {
 		m_currentBackground = rand() % 4;

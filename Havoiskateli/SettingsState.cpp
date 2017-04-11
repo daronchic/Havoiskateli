@@ -173,19 +173,20 @@ void SettingsState::createGui()
 	soundSlider->setPosition("parent.width / 2", "parent.height / 4 + 240");
 	soundSlider->setSize(200, 18);
 	soundSlider->setValue(GameConfig::instance()->getSoundVolume() / 10);
+	soundSlider->connect("ValueChanged", [&](int newValue) { AudioManager::instance()->changeVolume(-1, newValue * 10); AudioManager::instance()->playSound(Sounds::button_pressed, true); });
 
 	//Buttons
 	auto saveButton = tgui::Button::create();
 	saveButton->setPosition("parent.width / 2 - 200", "parent.height / 4 + 320");
 	saveButton->setText("Save");
 	saveButton->setSize(100, 30);
-	saveButton->connect("pressed", [&]() { this->saveSettings(); });
+	saveButton->connect("pressed", [&]() { this->saveSettings(); AudioManager::instance()->playSound(Sounds::button_pressed, true); });
 
 	auto backButton = tgui::Button::create();
 	backButton->setPosition("parent.width / 2 + 100", "parent.height / 4 + 320");
 	backButton->setText("Back");
 	backButton->setSize(100, 30);
-	backButton->connect("pressed", [=]() { m_stateCode = StateCode::MENU; });
+	backButton->connect("pressed", [=]() { m_stateCode = StateCode::MENU; AudioManager::instance()->playSound(Sounds::button_pressed, true); });
 
 	//Adding to gui
 	m_gui.add(graphicsTitle);

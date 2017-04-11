@@ -4,7 +4,7 @@ namespace sf
 {
 	class Image;
 	class Font;
-	class Sound;
+	class SoundBuffer;
 	class Music;
 }
 
@@ -39,8 +39,8 @@ namespace Sounds
 {
 	enum ID
 	{
-		test_1,
-		test_2
+		button_switched,
+		button_pressed
 	};
 }
 
@@ -58,5 +58,4 @@ class ResourceHolder;
 
 typedef ResourceHolder<sf::Image, Images::ID> ImagesHolder;
 typedef ResourceHolder<sf::Font, Fonts::ID> FontHolder;
-typedef ResourceHolder<sf::Sound, Sounds::ID> SoundHolder;
-typedef ResourceHolder<sf::Music, Musics::ID> MusicHolder;
+typedef ResourceHolder<sf::SoundBuffer, Sounds::ID> SoundHolder;

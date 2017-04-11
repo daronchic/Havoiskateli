@@ -24,7 +24,7 @@ sf::Image *ResourceManager::getImage(Images::ID id)
 	return &m_imageHolder.get(id);
 }
 
-sf::Sound *ResourceManager::getSound(Sounds::ID id)
+sf::SoundBuffer *ResourceManager::getSound(Sounds::ID id)
 {
 	return &m_soundHolder.get(id);
 }
@@ -44,5 +44,6 @@ void ResourceManager::loadData()
 	m_imageHolder.load(Images::menu_stand, "content/images/main_menu/player_stand.png");
 
 	//Get sounds
-
+	m_soundHolder.load(Sounds::button_switched, "content/sound/button_switched.ogg");
+	m_soundHolder.load(Sounds::button_pressed, "content/sound/button_pressed.ogg");
 }

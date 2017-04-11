@@ -10,7 +10,7 @@ public:
 
 	sf::Font* getFont(Fonts::ID id);
 	sf::Image* getImage(Images::ID id);
-	sf::Sound *getSound(Sounds::ID id);
+	sf::SoundBuffer *getSound(Sounds::ID id);
 private:
 	static ResourceManager *m_instance;
 	void loadData();
