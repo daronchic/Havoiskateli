@@ -40,7 +40,9 @@ namespace Sounds
 	enum ID
 	{
 		button_switched,
-		button_pressed
+		button_pressed,
+		player_changed,
+		player_switched
 	};
 }
 
@@ -48,6 +50,7 @@ namespace Musics
 {
 	enum ID
 	{
+		none,
 		menu,
 		city
 	};

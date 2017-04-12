@@ -6,6 +6,7 @@
 #include "AudioManager.h"
 
 #include <sstream>
+#include <fstream>
 
 
 
@@ -30,9 +31,36 @@ StateCode GameState::complete()
 void GameState::load()
 {
 	font.loadFromFile("content/fonts/8bitlimr.ttf");
+		std::fstream ifs;
+		ifs.open("content/profiles/current_profile.prof", std::fstream::binary | std::fstream::in);
+		std::string playerName;
+		std::string playerType;
+		if (ifs.is_open()) {
+			std::getline(ifs, playerName);
+			std::getline(ifs, playerType);
+		}
+		switch (atoi(playerType.c_str())) {
+		case 0:
+			this->m_player = Player(*ResourceManager::getInstance()->getImage(Images::player_1), 640 / 2, 480 / 2, 100, 3);
+			break;
+		case 1:
+			this->m_player = Player(*ResourceManager::getInstance()->getImage(Images::player_2), 640 / 2, 480 / 2, 100, 3);
+			break;
+		case 2:
+			this->m_player = Player(*ResourceManager::getInstance()->getImage(Images::player_3), 640 / 2, 480 / 2, 100, 3);
+			break;
+		case 3:
+			this->m_player = Player(*ResourceManager::getInstance()->getImage(Images::player_4), 640 / 2, 480 / 2, 100, 3);
+			break;
+		case 4:
+			this->m_player = Player(*ResourceManager::getInstance()->getImage(Images::player_1), 640 / 2, 480 / 2, 100, 3);
+			break;
+		case 5:
+			this->m_player = Player(*ResourceManager::getInstance()->getImage(Images::player_2), 640 / 2, 480 / 2, 100, 3);
+			break;
+		}
 
 	this->m_level = new Level("city_day/debug_level", Vector2(0, 0));
-	this->m_player = Player(*ResourceManager::getInstance()->getImage(Images::player_2), 640 / 2, 480 / 2, 100, 3);
 	this->m_hud = HUD(m_window->getSize().x - 180, m_window->getSize().y - 55);
 	this->m_hud.load();
 }

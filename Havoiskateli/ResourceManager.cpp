@@ -46,4 +46,6 @@ void ResourceManager::loadData()
 	//Get sounds
 	m_soundHolder.load(Sounds::button_switched, "content/sound/button_switched.ogg");
 	m_soundHolder.load(Sounds::button_pressed, "content/sound/button_pressed.ogg");
+	m_soundHolder.load(Sounds::player_changed, "content/sound/player_changed.ogg");
+	m_soundHolder.load(Sounds::player_switched, "content/sound/player_switched.ogg");
 }

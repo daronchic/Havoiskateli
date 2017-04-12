@@ -21,6 +21,7 @@ private:
 	static AudioManager *m_instance;
 	float m_musicVolume, m_soundVolume;
 	sf::Music m_currentMusic;
+	Musics::ID m_currentID{Musics::none};
 	sf::Sound m_sound;
 	std::map<Musics::ID, std::string> m_audioPath;
 };

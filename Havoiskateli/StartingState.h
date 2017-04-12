@@ -3,6 +3,10 @@
 #include "Player.h"
 #include "AnimatedObject.h"
 
+#include <SFML\Graphics.hpp>
+
+#include <TGUI\TGUI.hpp>
+
 struct PlayerData;
 
 class StartingState :
@@ -14,6 +18,7 @@ public:
 	~StartingState();
 
 	StateCode complete();
+	void saveProfile(const std::string &playerName, int playerNumber);
 	void load();
 	void init();
 	void handleInput(sf::Event &event);
@@ -31,4 +36,6 @@ private:
 
 	sf::String m_descriptionString;
 	sf::Text m_descriptionText;
+
+	tgui::Gui m_gui;
 };

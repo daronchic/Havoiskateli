@@ -144,6 +144,7 @@ void SettingsState::createGui()
 	screenResBox->addItem("800X600");
 	screenResBox->addItem("1024X768");
 	screenResBox->addItem("1366X768");
+	screenResBox->connect("ItemSelected", [&]() { AudioManager::instance()->playSound(Sounds::button_pressed, true); });
 	std::stringstream ss;
 	ss << GameConfig::instance()->getScreenSize().x << "X" << GameConfig::instance()->getScreenSize().y;
 	screenResBox->setSelectedItem(ss.str());
@@ -154,6 +155,7 @@ void SettingsState::createGui()
 	else {
 		screenModeBox->uncheck();
 	}
+	screenModeBox->connect("checked unchecked", [&]() { AudioManager::instance()->playSound(Sounds::button_pressed, true); });
 	screenVertSyncBox->setPosition("parent.width / 2 - width / 2", "parent.height / 4 + 120");
 	if (GameConfig::instance()->getVerticalSync()) {
 		screenVertSyncBox->check();
@@ -161,7 +163,7 @@ void SettingsState::createGui()
 	else {
 		screenVertSyncBox->uncheck();
 	}
-
+	screenVertSyncBox->connect("checked unchecked", [&]() { AudioManager::instance()->playSound(Sounds::button_pressed, true); });
 	//Audio boxes
 	auto musicSlider = tgui::Slider::create();
 	musicSlider->setPosition("parent.width / 2", "parent.height / 4 + 200");
@@ -180,13 +182,13 @@ void SettingsState::createGui()
 	saveButton->setPosition("parent.width / 2 - 200", "parent.height / 4 + 320");
 	saveButton->setText("Save");
 	saveButton->setSize(100, 30);
-	saveButton->connect("pressed", [&]() { this->saveSettings(); AudioManager::instance()->playSound(Sounds::button_pressed, true); });
+	saveButton->connect("pressed", [&]() { AudioManager::instance()->playSound(Sounds::button_pressed, true);  this->saveSettings();});
 
 	auto backButton = tgui::Button::create();
 	backButton->setPosition("parent.width / 2 + 100", "parent.height / 4 + 320");
 	backButton->setText("Back");
 	backButton->setSize(100, 30);
-	backButton->connect("pressed", [=]() { m_stateCode = StateCode::MENU; AudioManager::instance()->playSound(Sounds::button_pressed, true); });
+	backButton->connect("pressed", [=]() { AudioManager::instance()->playSound(Sounds::button_pressed, true); m_stateCode = StateCode::MENU;});
 
 	//Adding to gui
 	m_gui.add(graphicsTitle);

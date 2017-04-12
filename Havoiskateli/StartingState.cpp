@@ -1,7 +1,10 @@
 #include "stdafx.h"
 #include "StartingState.h"
 #include "ResourceManager.h"
+#include "AudioManager.h"
 #include "Globals.h"
+
+#include <fstream>
 
 struct PlayerData {
 	std::string playerName;
@@ -23,7 +26,7 @@ StartingState::StartingState() : State()
 {
 }
 
-StartingState::StartingState(sf::RenderWindow &window) : State(window)
+StartingState::StartingState(sf::RenderWindow &window) : State(window), m_gui(window)
 {
 }
 
@@ -40,11 +43,26 @@ StartingState::~StartingState()
 	}
 	m_players.clear();
 	m_playerStands.clear();
+	m_gui.removeAllWidgets();
 }
 
 StateCode StartingState::complete()
 {
+	if (m_stateCode != StateCode::NONE) {
+		m_window->setMouseCursorVisible(false);
+	}
 	return m_stateCode;
+}
+
+void StartingState::saveProfile(const std::string & playerName, int playerNumber)
+{
+	std::fstream ifs;
+	ifs.open("content/profiles/current_profile.prof", std::fstream::binary | std::fstream::out);
+
+	if (ifs.is_open()) {
+		ifs << playerName << '\n';
+		ifs << playerNumber;
+	}
 }
 
 void StartingState::load()
@@ -70,6 +88,7 @@ void StartingState::load()
 
 void StartingState::init()
 {
+	m_window->setMouseCursorVisible(true);
 	m_switchedY = m_window->getSize().y / 4 - 47;
 	m_bigStand.setPosition(m_window->getSize().x / 2 - m_bigStand.getLocalBounds().width / 2, m_window->getSize().y / 4);
 	for (int i = 0; i < 6; i++) {
@@ -86,21 +105,36 @@ void StartingState::init()
 	m_descriptionText.setFont(*ResourceManager::getInstance()->getFont(Fonts::menuFont));
 	m_descriptionText.setPosition(m_descriptionRect.getPosition().x + 10, m_descriptionRect.getPosition().y + 10);
 
+	tgui::EditBox::Ptr nameBox = tgui::EditBox::create();
+	//nameBox->setSize(100, 25);
+	nameBox->setPosition(m_descriptionRect.getPosition().x + 100 + nameBox->getSize().x, m_descriptionRect.getPosition().y + nameBox->getSize().y / 2);
+	nameBox->focus();
+	m_gui.add(nameBox, "nameBox");
 }
 
 void StartingState::handleInput(sf::Event & event)
 {
+	m_gui.handleEvent(event);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
+		AudioManager::instance()->playSound(Sounds::button_pressed, true);
 		m_stateCode = StateCode::MENU;
+	}
+	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Return) {
+		AudioManager::instance()->playSound(Sounds::player_switched, true);
+		tgui::EditBox::Ptr nameBox = m_gui.get<tgui::EditBox>("nameBox");
+		saveProfile(nameBox->getText(), m_switched);
+		m_stateCode = StateCode::NEXT;
 	}
 	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Left) {
 		m_switched--;
 		m_descriptionString = "Player name- %1\nHP- %2\nInventory capacity- %3 \n\nDescription- %4";
+		AudioManager::instance()->playSound(Sounds::player_changed, true);
 	}
 	else if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Right) {
 		m_switched++;
 		m_descriptionString = "Player name- %1\nHP- %2\nInventory capacity- %3 \n\nDescription- %4";
+		AudioManager::instance()->playSound(Sounds::player_changed, true);
 	}
 }
 
@@ -150,6 +184,7 @@ void StartingState::draw()
 	}
 	m_window->draw(m_descriptionRect);
 	m_window->draw(m_descriptionText);
+	m_gui.draw();
 }
 
 void StartingState::setPlayerData()

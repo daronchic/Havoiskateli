@@ -22,16 +22,20 @@ void AudioManager::loadMusic()
 
 	m_currentMusic.setVolume(m_musicVolume);
 	m_sound.setVolume(m_soundVolume);
+
 }
 
 void AudioManager::playMusic(Musics::ID id, bool once) 
 {
-	stopMusic();
-	if (!m_currentMusic.openFromFile(m_audioPath[id])) {
-		std::cout << "Error while loading audio file!" << std::endl;
+	if (m_currentID != id) {
+		stopMusic();
+		if (!m_currentMusic.openFromFile(m_audioPath[id])) {
+			std::cout << "Error while loading audio file!" << std::endl;
+		}
+		m_currentMusic.setLoop(!once);
+		m_currentMusic.play();
+		m_currentID = id;
 	}
-	m_currentMusic.setLoop(!once);
-	m_currentMusic.play();
 }
 
 void AudioManager::stopMusic()
@@ -49,11 +53,11 @@ void AudioManager::playSound(Sounds::ID id, bool once)
 }
 void AudioManager::changeVolume(float music_volume, float sound_volume)
 {
-	if (music_volume > 0) {
+	if (music_volume >= 0) {
 		m_musicVolume = music_volume;
 		m_currentMusic.setVolume(m_musicVolume);
 	}
-	if (sound_volume > 0) {
+	if (sound_volume >= 0) {
 		m_soundVolume = sound_volume;
 		m_sound.setVolume(m_soundVolume);
 	}
